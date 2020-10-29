@@ -1,0 +1,162 @@
+return model =
+  name: 'StarBooster'
+  level: 6
+  model: 6
+  size: 1.7
+  specs:
+    shield:
+      capacity: [225,300]
+      reload: [7.5,15]
+    generator:
+      capacity: [150,200]
+      reload: [80,160]
+    ship:
+      mass: 150
+      speed: [100,150]
+      rotation: [60,120]
+      acceleration: [130,150]
+  bodies:
+    front:
+      section_segments: 20
+      offset:
+        x: 0
+        y: -30
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-61,-58,-62,-50,-15,10,45]
+        z: [0,0,0,0,0,0,0]
+      width: [0,8,15,20,25,27,27]
+      height: [0,8,15,20,25,27,27]
+      texture: [6,15,63,3,2,11]
+      laser:
+        damage: [75,90]
+        rate: 1.5
+        type: 2
+        speed: [150,200]
+        number: 1
+        recoil: 70
+        error: 0
+    body1:
+      section_segments: 6
+      offset:
+        x: 12
+        y: 22
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-100,-80,-50,-10,10,30,40]
+        z: [0,0,0,0,0,0,0]
+      width: [0,23,26,28,28,28,0,0]
+      height: [0,10,10,10,10,10,5,5,5,0,0]
+      texture: [3,63,8,13,2,3]
+    detail1:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -14
+        z: 24
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [25,27,25,35,60,70,72,80,82]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,8,14,14,14,14,14,14,0]
+      height: [0,6,11,11,11,11,11,11,0]
+      texture: [17,12,4,10,8,17,63,3]
+    detail2:
+      section_segments: 12
+      offset:
+        x: 19
+        y: -38
+        z: 11
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [25,27,25,35,60,70,72,80,82]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,8,14,14,14,14,14,8,0]
+      height: [0,6,11,11,11,11,11,5,0]
+      texture: [16,12,63,10,8,4,4,3]
+    cockpit:
+      section_segments: 8
+      offset:
+        x: 0
+        y: 20
+        z: 16
+      position:
+        x: [0,0,0,0,0]
+        y: [-98,-70,-35,0,50]
+        z: [0,0,0,6,9]
+      width: [0,10,14,13,0]
+      height: [0,13,16,10,0]
+      texture: [4,9,9,4]
+    motor:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -2
+        z: 0
+      position:
+        x: [0,0,0,0,0]
+        y: [10,10,50,100,95]
+        z: [0,0,0,0,0]
+      width: [0,33,35,29,0]
+      height: [0,33,33,29,0]
+      texture: [5,8,4,17]
+      propeller: true
+    top_propulsors:
+      section_segments: 15
+      offset:
+        x: 30
+        y: 35
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-20,-15,0,10,20,34,34,40,60,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,14,15,15,15,15,15,12,0]
+      height: [0,10,14,15,15,15,15,15,12,0]
+      propeller: true
+      texture: [3,63,4,2,11,2,3,63,17]
+  wings:
+    main1:
+      doubleside: true
+      offset:
+        x: 33
+        y: 50
+        z: 4
+      length: [50,20]
+      width: [110,20]
+      angle: [0,0]
+      position: [20,0]
+      texture: [11]
+      bump:
+        position: 0
+        size: 4
+     main3:
+      doubleside: true
+      offset:
+        x:17
+        y:30
+        z:27
+      length: [0,0,0,15]
+      width: [10,10,10,-105,0]
+      angle: [20,20,20,50]
+      position: [20,20,20,20,10]
+      texture: [0,18,12,63]
+      bump:
+        position: 3
+        size: 15
+    main4:
+      doubleside: true
+      offset:
+        x: 70
+        y: 78
+        z:4
+      length: [0,0,0,25]
+      width: [0,0,0,100,0]
+      angle: [-20,-20,-20,0]
+      position: [-40,-40,-40,-50,-30]
+      texture: [0,8,63,63]
+      bump:
+        position: 15
+        size: 6
