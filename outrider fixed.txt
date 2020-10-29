@@ -1,0 +1,146 @@
+return model =
+  name: 'Outrider'
+  level: 4
+  model: 7
+  size: 2
+  specs:
+    shield:
+      capacity: [180,250]
+      reload: [9,12]
+    generator:
+      capacity: [85,125]
+      reload: [20,35]
+    ship:
+      mass: 250
+      speed: [85,100]
+      rotation: [60,80]
+      acceleration: [80,110]
+  bodies:
+    main:
+      section_segments: 12
+      offset:
+        x: 0
+        y: 10
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-65,-70,-70,-50,-25,-5,40,85,75]
+        z: [0,0,0,0,0,0,0,0,0]
+      width: [0,8,16,20,25,27,30,12,0]
+      height: [0,8,10,10,13,17,19,12,0]
+      texture: [12,5,4,63,2,10.2,2,17]
+      propeller: true
+      laser:
+        damage: [10,15]
+        rate: 2
+        type: 1
+        speed: [150,230]
+        number: 1
+        error: 0
+    cockpit:
+      section_segments: 7
+      offset:
+        x: 0
+        y: 30
+        z: 28
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-30,-20,0,17,25,34]
+        z: [-2,-7,-9,-10,-6,0]
+      width: [0,10,13,15,13,0]
+      height: [0,10,16,17,10,0]
+      texture: [4,9,9,9,4]
+      propeller: false
+    Systems:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 0
+        y: -30
+        z: 17
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-20,-20,0,11,19,19]
+        z: [-3,-4,-2,-1,0,0,0]
+      width: [0,7,7,7,7,0]
+      height: [0,10,10,10,10,0]
+      texture: [4,8,15,3,4]
+      propeller: false
+    Horns:
+      section_segments: [45,135,225,315]
+      offset:
+        x: -43
+        y: -26
+        z: 12
+      position:
+        x: [26,25,25,24,22,20,19]
+        y: [-35,-26,-24,-14,0,13,26]
+        z: [0,0,0,0,0,0,0]
+      width: [0,3,3,3,3,3,0]
+      height: [0,3,3,3,3,3,0]
+      texture: [6,3,8,13,3,63,63]
+      angle: 0
+      laser:
+        damage: [5,8]
+        rate: 4
+        type: 1
+        speed: [130,200]
+        number: 1
+        error: 1
+    propulsors:
+      section_segments:15
+      offset:
+        x: 50
+        y: 70
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-55,-50,-20,0,40,50,40]
+        z: [0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,0]
+      height: [0,10,15,15,15,10,0]
+      texture: [11,10,8,12,7,17]
+      angle: 0
+      propeller: true
+  wings:
+    main:
+      length: [40,15]
+      width: [60,40,40]
+      angle: [0,0]
+      position: [55,55,55]
+      texture: [8,15]
+      doubleside: true
+      offset:
+        x: 0
+        y: 11
+        z: 7
+      bump:
+        position: 30
+        size: 10
+    FinThings1:
+      length: [50]
+      width: [25,20]
+      angle: [-8]
+      position: [2,40]
+      texture: 63
+      doubleside: true
+      offset:
+        x: 10
+        y: 10
+        z: 13
+      bump:
+        position: 10
+        size: 5
+    FinThings2:
+      length: [20]
+      width: [50,11]
+      angle: [-22]
+      position: [12,20]
+      texture: 63
+      doubleside: true
+      offset:
+        x: 60
+        y: 50
+        z: 6
+      bump:
+        position: 10
+        size: 5
