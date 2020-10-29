@@ -1,0 +1,192 @@
+return model =
+  name: 'Jupiter'
+  level: 5
+  model: 6
+  size: 1.7
+  specs:
+    shield:
+      capacity: [200,250]
+      reload: [8,10]
+    generator:
+      capacity: [80,125]
+      reload: [30,55]
+    ship:
+      mass: 175
+      speed: [90,110]
+      rotation: [60,85]
+      acceleration: [90,140]
+  bodies:
+    main:
+      section_segments: 10
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-75,-75,0,0,10,25,80,80]
+        z: [0,0,0,0,0,0,0,0]
+      width: [0,17,35,35,35,26,20,0]
+      height: [0,5,25,25,25,20,16,0]
+      texture: [12,10,2,63,4,8,3]
+      propeller: false
+    cockpit:
+      section_segments: 5
+      offset:
+        x: 0
+        y: -60
+        z: 13
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-10,0,20,40,50]
+        z: [-7,-8,-4,0,10]
+      width: [0,7,10,13,0]
+      height: [0,10,12,10,0]
+      texture: [9]
+    cannons1:
+      section_segments: 12
+      offset:
+        x: 3
+        y: -103
+        z: -0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [3,0,13,13,40,52,57,52,63]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,2,2,3,4,4,4,5,5]
+      height: [0,2,2,3,4,4,4,5,5]
+      texture: [12,13,17,8,12,15,18,8]
+      propeller: false 
+      laser:
+        damage: [4,6]
+        rate: 5
+        type: 2
+        speed: [170,200]
+        recoil: 1
+        number: 1
+        error: 0
+    cannons2:
+      section_segments: 12
+      offset:
+        x: 11
+        y: -83
+        z: -0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [3,0,13,13,40,52,57,52,63]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,2,2,3,4,4,4,5,5]
+      height: [0,2,2,3,4,4,4,5,5]
+      texture: [12,13,17,8,12,15,18,8]
+      angle:-5
+      propeller: false 
+      laser:
+        damage: [7,12]
+        rate: 3
+        type: 2
+        speed: [170,200]
+        recoil: 1
+        number: 1
+        error: 0
+    propulsors:
+      section_segments: 8
+      offset:
+        x: 10
+        y: 0
+        z: 0
+      position:
+        x: [0,0,0]
+        y:[30,105,100]
+        z: [0,0,0]
+      width: [10,10,0]
+      height: [10,10,0]
+      propeller: true
+      texture: [12,13,45]
+    booster:
+      section_segments: 12
+      offset:
+        x: 35
+        y:65
+        z: -4
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,-10,0,20,25,20]
+        z: [0,0,0,0,0,0]
+      width: [0,8,8,8,5,0]
+      height: [0,10,10,10,5,0]
+      propeller: true
+      texture: [7,8,63,13,17]
+      angle: 0
+    booster2:
+      section_segments: 12
+      offset:
+        x: 65
+        y:70
+        z: -13
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,-10,0,20,25,20]
+        z: [0,0,0,0,0,0]
+      width: [0,8,8,8,5,0]
+      height: [0,10,10,10,5,0]
+      propeller: true
+      texture: [7,8,63,13,17]
+      angle: 0
+  wings:
+     main1:
+      doubleside: true
+      offset:
+        x: 20
+        y: 69
+        z: 6
+      length: [0,0,0,13]
+      width: [10,10,10,-105,0]
+      angle: [20,20,20,40]
+      position: [20,20,0,0,0]
+      texture: [0,18,12,63]
+      bump:
+        position: 3
+        size: 15
+     main2:
+      doubleside: true
+      offset:
+        x: 20
+        y: 69
+        z: -11
+      length: [0,0,0,13]
+      width: [10,10,10,-105,0]
+      angle: [-20,-20,-20,-40]
+      position: [20,20,0,0,0]
+      texture: [0,18,12,63]
+      bump:
+        position: 3
+        size: 15
+     main3:
+      doubleside: true
+      offset:
+        x: 20
+        y: 70
+        z: 0
+      length: [60,20]
+      width: [80,20]
+      angle: [-10,0]
+      position: [-20,0]
+      texture: [11]
+      bump:
+        position: 20
+        size: 10
+     topwing:
+      doubleside: true
+      offset:
+        x: 18
+        y: 60
+        z: -5
+      length: [40]
+      width: [70,20]
+      angle: [50]
+      position: [0,30]
+      texture: [11]
+      bump:
+        position: 10
+        size: 10
+

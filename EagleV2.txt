@@ -1,0 +1,98 @@
+return model =
+  name: 'Eagle'
+  level: 5
+  model: 6
+  size: 1.4
+  specs:
+    shield:
+      capacity: [160,240]
+      reload: [5,7]
+    generator:
+      capacity: [90,140]
+      reload: [20,40]
+    ship:
+      mass: 160
+      speed: [85,120]
+      rotation: [50,75]
+      acceleration: [140,160]
+  bodies:
+    main:
+      section_segments: 10
+      offset:
+        x: 0
+        y: 50
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-138,-120,-100,-40,-5,35,30]
+        z: [0,0,0,0,0,0,0]
+      width: [0,10,16,22,21,15,0]
+      height: [0,10,16,21,20,15,0]
+      texture: [3,63,10,4,13,17]
+      propeller: true
+    Cannon:
+      section_segments: 8
+      offset:
+        x: 56
+        y: 10
+        z: 9
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-55,-60,-10,10,26,30]
+        z: [0,0,0,0,0,0]
+      width: [0,3,4,6,6,0]
+      height: [0,3,4,6,6,0]
+      texture: [6,12,4,63,2]
+      laser:
+        damage: [5,7]
+        rate: 3.2
+        type: 1
+        speed: [120,150]
+        number: 1 
+    cockpit:
+      section_segments: 6
+      offset:
+        x: 0
+        y: -8
+        z: 29
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-40,-30,-10,18,30]
+        z: [-3,-3,-1,0,1]
+      width: [0,6,7,8,0]
+      height: [0,3,5,7,0]
+      texture: [3,9,9,3,4]
+    cannon1:
+      section_segments: 8
+      offset:
+        x: 29
+        y: -20
+        z: 5
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-18,-20,10,35,45]
+        z: [0,0,0,0,0]
+      width: [0,3,4,5,0]
+      height: [0,3,4,5,0]
+      texture: [6,12,4,1,1]
+      laser:
+        damage: [10,18]
+        rate: 1
+        type: 1
+        speed: [150,170]
+        number: 1 
+   wings:
+    main:
+      doubleside: true
+      offset:
+        x: 13
+        y: 30
+        z: 10
+      length: [20,26,0,22]
+      width: [140,90,50,135,95]
+      angle: [0,0,-25,15]
+      position: [0,-0,-5,-37,10]
+      texture: [63,3,12,63]
+      bump:
+        position: 35
+        size:6
