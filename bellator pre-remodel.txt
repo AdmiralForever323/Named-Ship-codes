@@ -1,0 +1,1689 @@
+x = 0
+y = 300
+z = 50
+yPos = 505
+zPos = 25
+#unimplimented variables
+armorHeight = 0
+scale = 1
+angle = 0
+#don't fuck with this
+Array::mult = (m) -> @map (v) -> v*m
+Array::add = (m) -> @map (v) -> v+m
+for key, value of []
+  delete Array::[key]
+  Object.defineProperty Array::, key,
+    value: value
+    configurable: true
+    enumerable: false
+addTurret = (n, xpos, ypos, zpos, size, angle, damage, rate, speed, number) ->
+  model.bodies['TurretBase'+n] =
+    section_segments: 32
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-20,-20,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,19,19,0].mult(size)
+    height: [0,19,19,0].mult(size)
+    texture: [3,2,11]
+    vertical: true
+  model.bodies['Turret'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [0,0,0,0,0]
+      y: [-20,-20,10,31.2,31.2].mult(size)
+      z: [0,0.1,1,0,0].mult(size)
+    width: [0,30,40,25,0].mult(size)
+    height: [0,10,13,15,0].mult(size)
+    texture: [2,1,1,1,1,1]
+    angle: angle
+  model.bodies['TurretBarrel'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [18,18,18,18,18,18,18].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.40)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.40)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel1'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-18,-18,-18,-18,-18,-18,-18].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.40)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel2'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [12,12,12,12,12,12,12].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel3'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-12,-12,-12,-12,-12,-12,-12].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretThing1'+n] =
+    section_segments: 12
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [10,10,10,10,10,10,10].mult(size)
+      y: [-25.5,-25.5,-9,1,9,25.5,25.5].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1.5)
+    height: [0,5,5,5,5,5,0].mult(size*1.5)
+    texture: [7]
+    angle: angle+90
+  model.bodies['TurretGunMount1'+n] =
+    section_segments: 12
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [20,20,20,20,20,20,20].mult(size)
+      y: [-20,-20,-10,10,20,20].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,12,4,12,1]
+    angle: angle+90
+  model.bodies['TurretThing3'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-20,-20,-20,-20,-20,-20,-20].mult(size)
+      y: [-20,-20,-9,1,9,20,20].mult(size)
+      z: [8,8,8,8,8,8,8].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [13]
+    angle: angle+90
+  model.bodies['TurretThing4'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [10,10,10,10,10,10,10].mult(size)
+      y: [-20,-20,0,5,10,14,14].mult(size)
+      z: [5,5,5,5,5,5,5].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [8]
+    angle: angle+90
+  model.bodies['Turretline'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [0,0,0,0,0,0,0].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['Turretline1'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-3,-3,-3,-3,-3,-3,-3].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['Turretline2'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-6,-6,-6,-6,-6,-6,-6].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['Turretline3'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-9,-9,-9,-9,-9,-9,-9].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['TurretPlating'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [24,24,24,24,24,24,24].mult(size)
+      y: [-10,-10,-5,5,5,10,10].mult(size/0.96)
+      z: [7,7,7,7,7,7,7].mult(size+-1)
+    width: [0,25,25,25,25,25,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,1,3,1,1]
+    angle: angle+90
+  model.bodies['TurretPlating1'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [24,24,24,24,24,24,24].mult(size)
+      y: [20,20,20,20,20,22,22].mult(size)
+      z: [7,7,7,7,7,7,7].mult(size-0.9)
+    width: [0,25,25,25,25,25,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,1,3,1,1]
+    angle: angle+90
+  model.bodies['TurretPlating2'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [24,24,24,24,24,24,24].mult(size)
+      y: [-22,-22,-20,-20,-20,-20,-20].mult(size)
+      z: [7,7,7,7,7,7,7].mult(size-0.9)
+    width: [0,25,25,25,25,25,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,1,3,1,1]
+    angle: angle+90
+  model.bodies['TurretPlating3'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [24,24,24,24,24,24,24].mult(size*-0.4)
+      y: [10,10,20,20,20,22,22].mult(size*0.9)
+      z: [7,7,7,7,7,7,7].mult(size-0.1)
+    width: [0,25,25,25,25,25,0].mult(size*0.6)
+    height: [0,10,10,10,10,10,0].mult(size*1)
+    texture: [2,2,3,2,2]
+    angle: angle+90
+addShieldGenerator = (n, xpos, ypos, zpos, size, angle) ->
+  model.bodies['turretBase1'+n] =
+      section_segments: 12
+      offset:
+        x: xpos+x
+        y: zpos+z+4
+        z: -ypos-y
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-26,-22,-15,-0,13,23,26,27].mult(size)
+        z: [0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,10,25,29,25,15,9,0].mult(size)
+      height: [0,10,25,29,25,15,9,0].mult(size)
+      texture: [5,16,2,2,12,12,17]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['TurretBase2'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-43,-43,-3,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,8,8,0].mult(size)
+    height: [0,8,8,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase3'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [5,5,5,5,5,5]
+      y: [-43,-43,45,45].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase4'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [-5,-5,-5,-5,-5,-5]
+      y: [-43,-43,45,45].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase5'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-45,-43,45,45].mult(size)
+      z: [15,15,15,15,15,15].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase6'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-45,-43,45,45].mult(size)
+      z: [-15,-15,-15,-15,-15,-15].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase7'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x 
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [4,4,4,4,4,4]
+      y: [-45,-43,45,45].mult(size)
+      z: [-10,-10,-10,-10,-10,-10].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase8'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [-4,-4,-4,-4,-4,-4]
+      y: [-45,-43,45,45].mult(size)
+      z: [-10,-10,-10,-10,-10,-10].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase9'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [-4,-4,-4,-4,-4,-4]
+      y: [-45,-43,45,45].mult(size)
+      z: [13,13,13,13,13,13].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase10'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos+z
+      z: -ypos-y
+    position:
+      x: [4,4,4,4,4,4]
+      y: [-45,-43,45,45].mult(size)
+      z: [13,13,13,13,13,13].mult(size)
+    width: [0,2,2,0].mult(size)
+    height: [0,2,2,0].mult(size)
+    texture: [17,12,11]
+    vertical: true
+    angle:angle
+  model.bodies['TurretBase11'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+x
+      y: zpos-6+z
+      z: -ypos-y
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-43,-43,-3,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,18,18,0].mult(size)
+    height: [0,18,18,0].mult(size)
+    texture: [17,2,2]
+    vertical: true
+    angle:angle
+plate = (px,py,pz,l,w,ang,tex,h) ->
+  section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+  offset:
+    x: px+x
+    y: py+y
+    z: pz+z
+  position:
+    x: [0,0,0,0]
+    y: [-l,-l,l,l]
+    z: [0,0,0,0]
+  width: [0,w,w,0]
+  height: [0,h,h,0]
+  texture: [tex]
+  angle:ang
+addIonCannon = (n, xpos, ypos, zpos, size, angle, damage, rate, speed, number) ->
+  model.bodies['TurretBase'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [0,0,0,0,0,0]
+      y: [0,0,39,39].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,19,19,0].mult(size)
+    height: [0,19,19,0].mult(size)
+    texture: [3,2,3]
+    vertical: false
+    angle: -76 
+  model.bodies['BAll'+n] =
+      section_segments: 25
+      offset:
+        x: xpos+x
+        y: ypos+y
+        z: zpos+z
+      position:
+        x:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:    [-17*1*2,-16.815*1*2,-16*1*2,-15.12*1*2,-13.24*1*2,-11.36*1*2,-9.48*1*2,-7.5*1*2,-5.46*1*2,-3.838*1*2,-1.878*1*2,0,1.878*1*2,3.828*1*2,5.46*1*2,7.6*1*2,9.48*1*2,11.36*1*2,13.24*1*2,15.118*1*2,16*1*2,16.815*1*2,17*1*2].mult(size)
+        z:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0].mult(size)
+      width:  [0,5*1,11.49*1,15.55*1,21.326*1,25.294*1,28.222*1,30.414*1,32.198*1,33.122*1,33.792*1,34*1,33.792*1,33.122*1,32.198*1,30.414*1,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0].mult(size)
+      height: [0,5*1,11.49*1,15.55*1,21.326*1,25.294*1,28.222*1,30.414*1,32.198*1,33.122*1,33.792*1,34*1,33.792*1,33.122*1,32.198*1,30.414*1,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0].mult(size)
+      texture: [1,2,3,4,2,2,2,2,2,2,2,2,2,1,1,4,17,4]
+      propeller: false
+      vertical: false
+      angle:angle
+  model.bodies['TurretBarrel'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [4,4,4,4,4,4,4].mult(size)
+      y: [-32,-39,-30,-13,8,10].mult(size*1.3)
+      z: [-1,-1,-1,-1,-1,-1,-1].mult(size)
+    width: [0,3,5,5,5,5,0].mult(size*0.40)
+    height: [0,3,5,5,5,5,0].mult(size*0.40)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel1'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [-4,-4,-4,-4,-4,-4,-4].mult(size)
+      y: [-32,-39,-30,-13,8,10].mult(size*1.3)
+      z: [-1,-1,-1,-1,-1,-1,-1].mult(size)
+    width: [0,3,5,5,5,5,0].mult(size*0.4)
+    height: [0,3,5,5,5,5,0].mult(size*0.40)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel2'+n] =
+    section_segments: 22
+    offset:
+      x: xpos+x
+      y: ypos+y
+      z: zpos+z
+    position:
+      x: [0,0,0,0,0,0,0].mult(size)
+      y: [-32,-39,-30,-13,8,10].mult(size*1.3)
+      z: [5,5,5,5,5,5,5].mult(size)
+    width: [0,3,5,5,5,5,0].mult(size*0.4)
+    height: [0,3,5,5,5,5,0].mult(size*0.4)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+addTrench = (n, xpos, ypos, zpos, size, angle, damage, rate, speed, number) ->
+  model.bodies['Trench'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [0,0,0,0,0]
+      y: [-20,-20,10,34.2,34.2].mult(size)
+      z: [0,0,0,0,0].mult(size)
+    width: [0,10,10,10,0].mult(size)
+    height: [0,12,12,12,0].mult(size)
+    texture: [1]
+    angle: angle
+  model.bodies['TurretThing1'+n] =
+    section_segments: 15
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [10,10,10,10,10,10,10].mult(size)
+      y: [-10.5,-10.5,-9,1,9,10.5,10.5].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [3,5,5,5,5,5,3].mult(size*1.5)
+    height: [3,5,5,5,5,5,3].mult(size*1.5)
+    texture: [4]
+    angle: angle+90
+  model.bodies['TurretThing2'+n] =
+    section_segments: 15
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-8,-8,-8,-8,-8,-8,-8].mult(size)
+      y: [-10.5,-10.5,-9,1,9,10.5,10.5].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [3,5,5,5,5,5,3].mult(size*1.5)
+    height: [3,5,5,5,5,5,3].mult(size*1.5)
+    texture: [4]
+    angle: angle+90
+  model.bodies['TurretThing3'+n] =
+    section_segments: 15
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-25,-25,-25,-25,-25,-25,-25].mult(size)
+      y: [-10.5,-10.5,-9,1,9,10.5,10.5].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [3,5,5,5,5,5,3].mult(size*1.5)
+    height: [3,5,5,5,5,5,3].mult(size*1.5)
+    texture: [4]
+    angle: angle+90
+
+model =
+  name: 'Bellator SSD'
+  level: 7
+  model: 3
+  size: 1.25
+  zoom: 1.25
+  specs:
+    shield:
+      capacity: [10000,10000]
+      reload: [300,300]
+    generator:
+      capacity: [5000,5000]
+      reload: [2000,2000]
+    ship:
+      mass: 3500
+      speed: [95,95]
+      rotation: [18,18]
+      acceleration: [70,70]
+  bodies:
+    bump1: plate(170,-394,-45,801,6,11.6,3,9) 
+    bump2: plate(0,-1184,-45,15,6,90,3,9) 
+#spheres
+    PowerReactor1:
+      section_segments: 55
+      offset:
+        x: 0+x
+        y: -80+z
+        z: -50-y
+      position:
+        x:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:    [-17*1*2,-16.815*1*2,-16*1*2,-15.12*1*2,-13.24*1*2,-11.36*1*2,-9.48*1*2,-7.5*1*2,-5.46*1*2,-3.838*1*2,-1.878*1*2,0,1.878*1*2,3.828*1*2,5.46*1*2,7.6*1*2,9.48*1*2,11.36*1*2,13.24*1*2,15.118*1*2,16*1*2,16.815*1*2,17*1*2]
+        z:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:  [0,5*2,11.49*2,15.55*2,21.326*2,25.294*2,28.222*2,30.414*2,32.198*2,33.122*2,33.792*2,34*2,33.792*2,33.122*2,32.198*2,30.414*2,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0]
+      height: [0,5*2,11.49*2,15.55*2,21.326*2,25.294*2,28.222*2,30.414*2,32.198*2,33.122*2,33.792*2,34*2,33.792*2,33.122*2,32.198*2,30.414*2,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0]
+      texture: [2]
+      propeller: false
+      vertical: true
+    PowerReactor2:
+      section_segments: 55
+      offset:
+        x: 0+x
+        y: -50+z
+        z: 500-y
+      position:
+        x:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:    [-17*1*2,-16.815*1*2,-16*1*2,-15.12*1*2,-13.24*1*2,-11.36*1*2,-9.48*1*2,-7.5*1*2,-5.46*1*2,-3.838*1*2,-1.878*1*2,0,1.878*1*2,3.828*1*2,5.46*1*2,7.6*1*2,9.48*1*2,11.36*1*2,13.24*1*2,15.118*1*2,16*1*2,16.815*1*2,17*1*2]
+        z:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:  [0,5*2,11.49*2,15.55*2,21.326*2,25.294*2,28.222*2,30.414*2,32.198*2,33.122*2,33.792*2,34*2,33.792*2,33.122*2,32.198*2,30.414*2,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0]
+      height: [0,5*2,11.49*2,15.55*2,21.326*2,25.294*2,28.222*2,30.414*2,32.198*2,33.122*2,33.792*2,34*2,33.792*2,33.122*2,32.198*2,30.414*2,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0]
+      texture: [2]
+      propeller: false
+      vertical: true
+#bridge and superstructure
+     Bridge_Superstructure1:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:71.2+x
+        y: -45+z
+        z: -120-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [40,40,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,105,105,105,105,0]
+      height: [305,305,305,305,305,305]
+      texture: [2]
+      angle:6
+      vertical:true
+     Bridge_Superstructure2:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 57+x
+        y: -10+z
+        z: -246-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [40,40,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,95,95,95,95,0]
+      height: [170,170,205,235,235,235]
+      texture: [2]
+      angle:10
+      vertical:true
+     Bridge_Superstructure3:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 33.8+x
+        y:28+z
+        z: -256-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [40,40,45,45,50,50]
+        z: [0,0,0,0,0,0]
+      width: [0,70,66,66,62,0]
+      height: [0,225,225,225,225,0]
+      texture: [1,1,1,1,1,1]
+      angle:10
+      vertical:true
+     Bridge_Superstructure4:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y:-26+z
+        z: 120-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,0,0,0,61,61]
+        z: [0,0,0,0,0,0]
+      width: [0,75,75,75,55,0]
+      height: [150,150,155,300,295,295]
+      texture: [1,1,1,1,1,1]
+      angle:0
+      vertical:true
+     Bridge_Superstructure5:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y:-9+z
+        z: -122-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,67,67]
+        z: [0,0,0,0,0,0]
+      width: [0,55,55,57,52,0]
+      height: [150,150,165,230,215,215]
+      texture: [1,1,1,1,1,1]
+      angle:0
+      vertical:true
+     Bridge_Superstructure6:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y:14+z
+        z: -232-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,77,77]
+        z: [0,0,0,0,0,0]
+      width: [0,55,55,53.8,48,0]
+      height: [150,150,165,235,215,215]
+      texture: [1,1,1,1,1,1]
+      angle:0
+      vertical:true
+     Bridge_Superstructure8:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:31.2+x
+        y: -35+z
+        z: -160-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [40,40,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,105,105,105,105,0]
+      height: [305,305,305,305,305,305]
+      texture: [1]
+      angle:6
+      vertical:true
+     Bridge_Superstructure9:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:.01+x
+        y: 50+z
+        z: 346.2-y
+      position:
+        x: [0,0,0,50,130,165]
+        y: [0,0,30,45,48,98]
+        z: [0,-6,-13,-13,-14,-18]
+      width: [0,205,205,155,195,90]
+      height: [0,15,15,12,11,0]
+      texture: [2]
+      angle:90
+      vertical:false
+     Bridge_Superstructure10:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:.01+x
+        y: -13+z
+        z: 347.9-y
+      position:
+        x: [0,0,0,30,30,72]
+        y: [0,0,30,45,48,98]
+        z: [0,-6,-13,-15,-15,-20]
+      width: [0,205,205,155,155,50]
+      height: [0,15,15,12,11,0]
+      texture: [2]
+      angle:90
+      vertical:false
+     Bridge_Superstructure11:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:-50.01+x
+        y: 194+z
+        z:345-y
+      position:
+        x: [-130,-130,-130,-190,-210,-210]
+        y: [0,0,30,45,58,100]
+        z: [0,-9,-16.6,-17.8,-19,-17]
+      width: [0,205,205,155,155,160]
+      height: [0,15,14,13,12,0]
+      texture: [3]
+      angle:269
+      vertical:false
+     Bridge_Superstructure12:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:-1.01+x
+        y: 304+z
+        z:355-y
+      position:
+        x: [0,0,0,-130,-210,-112]
+        y: [0,0,30,45,48,120]
+        z: [0,-6,-13,-15,-15,-22]
+      width: [0,205,205,155,155,160]
+      height: [0,15,14,13,12,0]
+      texture: [2]
+      angle:270
+      vertical:false
+     Bridge_Superstructure13:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:-90.01+x
+        y:404+z
+        z:342-y
+      position:
+        x: [-130,-130,-130,-190,-210,-210]
+        y: [0,0,30,45,58,100]
+        z: [0,-9,-16.6,-17.8,-19,-17]
+      width: [0,205,205,155,155,160]
+      height: [0,15,14,13,12,0]
+      texture: [3]
+      angle:269
+      vertical:false
+     Bridge_Superstructure14:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x:-200.01+x
+        y:399+z
+        z:335-y
+      position:
+        x: [-130,-130,-130,-190,-210,-210]
+        y: [-40,-40,0,45,58,100]
+        z: [-19,-19,-12.6,-6.8,-6,11]
+      width: [0,205,205,155,155,160]
+      height: [0,15,14,13,12,0]
+      texture: [3]
+      angle:439
+      vertical:false
+     Bridge_Trench1:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y:-2+z
+        z: -255-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [37,37,37,37,72,82]
+        z: [0,0,0,0,0,0]
+      width: [0,55,55,124.3,117,0]
+      height: [150,150,165,215,215,215]
+      texture: [2]
+      angle:0
+      vertical:true
+     Bridge_Trench2:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y:-43+z
+        z: -236-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,71,89]
+        z: [0,0,0,0,0,0]
+      width: [0,55,55,180,180,0]
+      height: [150,150,165,215,215,215]
+      texture: [3]
+      angle:0
+      vertical:true
+     Bridge_Trench3:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y:-82+z
+        z: -136-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,78,89]
+        z: [0,0,0,0,0,0]
+      width: [0,55,55,200,200,0]
+      height: [150,150,165,315,315,315]
+      texture: [3]
+      angle:0
+      vertical:true
+#superstructure outline
+     Superstructure_Outlines1:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 35.7+x
+        y:-50.1+z
+        z: 328-y
+      position:
+        x: [12.5,12.5,12.5,12.5,0,0]
+        y: [30,30,30,30,85,85]
+        z: [5,3,3,3,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:0
+      vertical:true
+     Superstructure_Outlines2:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -35+x
+        y:-23.1+z
+        z: 331-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,87.4,87.4]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:90
+      vertical:true
+     Superstructure_Outlines3:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -35+x
+        y:31.4+z
+        z: 328-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,74,76]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:90
+      vertical:true
+     Superstructure_Outlines4:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -35+x
+        y:54.8+z
+        z: 30-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,72,72]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:90
+      vertical:true
+     Superstructure_Outlines5:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -35+x
+        y:34+z
+        z: 34-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,73,75]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:90
+      vertical:true
+     Superstructure_Outlines6:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -34+x
+        y:6+z
+        z: 33-y
+      position:
+        x: [0,0,3,-2,0,0]
+        y: [30,30,30,30,50,50]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:0
+      vertical:true
+     Superstructure_Outlines7:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -35+x
+        y:61+z
+        z: -74-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,71,71]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:90
+      vertical:true
+     Superstructure_Outlines8:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: -35+x
+        y:89+z
+        z: -74-y
+      position:
+        x: [0,0,0,0,0,0]
+        y: [30,30,30,30,71,71]
+        z: [0,0,0,0,0,0]
+      width: [0,5,5,5,5,0]
+      height: [0,5,5,5,5,0]
+      texture: [2]
+      angle:90
+      vertical:true
+#Bridge and neck
+    Bridge1:
+      section_segments: 6
+      offset:
+        x: 0+x
+        y: 300+y
+        z: 115+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-30,0,5,20,30,41,42,43,44]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,37,37,37,37,37,19,14,9,0]
+      height: [0,9,9,9,9,9,9,8,7,0] 
+      texture: [0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8]
+      propeller: false
+    BridgeNeck:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y: 320+y
+        z: 80+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,20,20,20,20,20,20,20,20,0]
+      height: [0,55,49,47,45,44,43,38,38,0]
+      texture: [3,3,3,3,1,1,1,1,1]
+      propeller: false
+      vertical:false
+      angle:0
+#Hull
+    Underside:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 237+x
+        y: -70+y
+        z: -64.5+z
+      position:
+        x: [-492,344,344,0,0,0,0,0]
+        y: [-333,0,0,0,0,0,0,0]
+        z: [-46,10,10,10,10,10,0,0]
+      width: [0.01,1180,1180,0,0,0,0,0]
+      height: [4,4,4,4,4,0,0,0]
+      texture: [1]
+      angle: 101.25
+    Top:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 237+x
+        y: -70+y
+        z:-28.2+z
+      position:
+        x: [-525,344,344,0,0,0,0,0]
+        y: [-339,0,0,0,0,0,0,0]
+        z: [46,-10,-10,-10,-10,-10,0,0]
+      width: [0.01,1181,1180,0,0,0,0,0]
+      height: [4,4,4,4,4,0,0,0]
+      texture: [1]
+      angle: 101.25
+#top armor gaps
+    Gap1:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 320+x
+        y: 254+y
+        z: -37.75+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,0,0,0,0,0]
+        z: [1.5,0,0,0,0,0]
+      width: [221,221,221,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap2:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 244+x
+        y: -107+y
+        z: -37.7+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,0,0,0,0,0]
+        z: [1.5,0,0,0,0,0]
+      width: [191,191,191,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap3:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 175+x
+        y: -450+y
+        z: -37.70+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,0,0,0,0,0]
+        z: [1.5,0,0,0,0,0]
+      width: [191,191,191,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap4:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 108+x
+        y: -780+y
+        z: -37.87+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-16,0,0,0,0,0]
+        z: [1.5,0,0,0,0,0]
+      width: [191,191,191,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap5:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 37.4+x
+        y: -1119+y
+        z: -38.2+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-9,0,0,0,0,0]
+        z: [1.5,0,0,0,0,0]
+      width: [161,161,161,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.3
+     Gap6:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y: -390+y
+        z: -10.86+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [-26,-26,2.4,2.4,2.4,2.4]
+      width: [0,10,10,10,10,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle:0
+      vertical:false
+#bottom gaps
+    Gap7:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 320+x
+        y: 254+y
+        z: -54.6+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,0,0,0,0,0]
+        z: [-1.5,0,0,0,0,0]
+      width: [221,221,221,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap8:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 244+x
+        y: -107+y
+        z: -57+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,0,0,0,0,0]
+        z: [-1.5,0,0,0,0,0]
+      width: [191,191,191,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap9:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 175+x
+        y: -450+y
+        z: -55.6+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,0,0,0,0,0]
+        z: [-1.5,0,0,0,0,0]
+      width: [191,191,191,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap10:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 108+x
+        y: -780+y
+        z: -54.7+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-16,0,0,0,0,0]
+        z: [-1.5,0,0,0,0,0]
+      width: [191,191,191,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+    Gap11:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 37+x
+        y: -1115+y
+        z: -54.5+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-7,0,0,0,0,0]
+        z: [-1.5,0,0,0,0,0]
+      width: [166,161,161,0,0,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle: 101.5
+     Gap12:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y: -390+y
+        z: -82+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [26,26,-2.4,-2.4,-2.4,-2.4]
+      width: [0,10,10,10,10,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle:0
+      vertical:false
+     Gap13:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y: 426+y
+        z: -109+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [26,26,-2.4,-2.4,-2.4,-2.4]
+      width: [0,10,10,10,10,0]
+      height: [2,2,2,2,2,2]
+      texture: [1]
+      angle:0
+      vertical:false
+     Gap14:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 0+x
+        y: -190+y
+        z: -42+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,54,54,64,74,0]
+      height: [0,10,16,16,16,0]
+      texture: [1]
+      angle:0
+      vertical:false
+     Gap15:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 50+x
+        y: 290+y
+        z: -50+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,64,64,64,74,0]
+      height: [0,10,16,16,16,0]
+      texture: [1]
+      angle:0
+      vertical:false
+     Gap16:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 80+x
+        y: 250+y
+        z: -45+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,74,74,74,74,0]
+      height: [0,10,16,16,16,0]
+      texture: [1]
+      angle:0
+      vertical:false
+     Gap17:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 260+x
+        y: 290+y
+        z: -50+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,64,64,64,74,0]
+      height: [0,10,16,16,16,0]
+      texture: [1]
+      angle:11.3
+      vertical:false
+     Gap18:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 180+x
+        y: 290+y
+        z: -50+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-839,-839,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,64,64,64,74,0]
+      height: [0,10,16,16,16,0]
+      texture: [1]
+      angle:11.3
+      vertical:false
+     Gap19:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 110+x
+        y: -560+y
+        z: -50+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-599,-599,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,14,44,44,44,0]
+      height: [0,10,10,10,10,0]
+      texture: [1]
+      angle:10.5
+      vertical:false
+     Gap20:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 50+x
+        y: -560+y
+        z: -50+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-399,-399,40,45,51,51]
+        z: [0,0,0,0,0,0]
+      width: [0,14,44,44,44,0]
+      height: [0,10,10,10,10,0]
+      texture: [1]
+      angle:5
+      vertical:false
+#engines and things
+    Engines:
+      section_segments: 17
+      offset:
+        x: 170+x
+        y: 480+y
+        z: -45+z 
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,25,25,25,0]
+      height: [0,10,15,15,15,10,25,25,25,0]
+      texture: [3,4,10,3,4,3,13,1,17]
+      propeller:true
+    Engines1:
+      section_segments: 12
+      offset:
+        x: 0+x
+        y: 400+y
+        z: -78+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,18,18,15,0]
+      height: [0,10,15,15,15,10,18,18,15,0]
+      texture: [3,4,10,3,4,3,13,1,17]
+      propeller: true
+    Engines2:
+      section_segments: 12
+      offset:
+        x: 202+x
+        y: 460+y
+        z: -58+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,18,18,15,0]
+      height: [0,10,15,15,15,10,18,18,15,0]
+      texture: [3,4,10,3,4,3,2,1,17]
+      propeller: true
+    Engines3:
+      section_segments: 10
+      offset:
+        x: 40+x
+        y: 400+y
+        z: -73+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,18,18,15,0]
+      height: [0,10,15,15,15,10,18,18,15,0]
+      texture: [3,4,10,3,4,3,2,1,17]
+      propeller: true
+    Engines4:
+      section_segments: 12
+      offset:
+        x: 70+x
+        y: 590+y
+        z: -6+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,13,13,13,13,13,13,14,13,0]
+      height: [0,13,13,13,13,13,13,14,13,0]
+      texture: [3,4,10,3,4,3,2,1,17]
+      propeller: true
+    Engines5:
+      section_segments: 12
+      offset:
+        x: 40+x
+        y: 600+y
+        z: -5+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,18,18,15,0]
+      height: [0,10,15,15,15,10,18,18,15,0]
+      texture: [3,4,10,3,4,3,2,1,17]
+      propeller: true
+    Engines6:
+      section_segments: 12
+      offset:
+        x: 0+x
+        y: 610+y
+        z: -4+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,18,18,15,0]
+      height: [0,10,15,15,15,10,18,18,15,0]
+      texture: [3,4,10,3,4,3,2,1,17]
+      propeller: true
+    Engines7:
+      section_segments: 10
+      offset:
+        x: 80+x
+        y: 400+y
+        z: -65+z
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,30,70,70,70]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,15,15,15,10,18,18,15,0]
+      height: [0,10,15,15,15,10,18,18,15,0]
+      texture: [3,4,10,3,4,3,2,1,17]
+      propeller: true
+    AAAAA:
+      section_segments: [45,135,225,315]
+      offset:
+        x: -154+x
+        y: 370+y
+        z: -45+z
+      position:
+        x: [0,0,0,0]
+        y: [-154,-154,170,170]
+        z: [0,0,0,0]
+      width: [0,52,52,0]
+      height: [0,83,10,0]
+      texture: [3,3,2,4]
+      angle: 270
+     Attachment1:
+      section_segments: [45,135,165,220,320,15]
+      offset:
+        x: 185+x
+        y:400+y
+        z: -45+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [37,37,37,37,122,122]
+        z: [0,0,0,0,0,0]
+      width: [0,55,55,55,55,0]
+      height: [0,35,35,35,35,0]
+      texture: [1]
+      angle:0
+      vertical:false
+     Attachment2:
+      section_segments: 18
+      offset:
+        x: 0+x
+        y:330+y
+        z: -5+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [67,67,67,67,322,322]
+        z: [0,0,0,0,0,0]
+      width: [0,125,125,125,105,0]
+      height: [0,35,35,35,25,0]
+      texture: [1,1,1,1,2]
+      angle:0
+      vertical:false
+     Attachment3:
+      section_segments: [45,90+45,180+45,270+45]
+      offset:
+        x: 125+x
+        y:420+y
+        z: -22+z
+      position:
+        x: [0,0,0,0,0,0]
+        y: [37,37,37,37,122,122]
+        z: [0,0,0,0,0,0]
+      width: [0,25,25,25,25,0]
+      height: [0,35,35,35,35,0]
+      texture: [2]
+      angle:0
+      vertical:false
+addShieldGenerator(1,26,287,125,0.19,5)
+addShieldGenerator(21,0,-367,5,0.35,0)
+addShieldGenerator(26,0,-347,15,0.45,0)
+addShieldGenerator(27,150,397,15,0.45,0)
+addTurret(2,190,420,-7,0.4,-120,[10,10],5.5,[160,160],1)
+addTurret(3,210,390,-10,0.4,-90,[60,60],1.5,[160,160],1)
+addTurret(4,230,350,-12,0.4,-65,[60,60],1.5,[160,160],1)
+addTurret(5,240,310,-16,0.4,-55,[10,10],4.5,[160,160],1)
+addTurret(6,250,270,-18,0.4,-50,[60,60],1.5,[160,160],1)
+addTurret(7,260,230,-18,0.4,-60,[60,60],1.5,[160,160],1)
+addTurret(8,200,140,-16,0.4,-25,[10,10],4,[160,160],1)
+addTurret(9,224,170,-18,0.4,-25,[60,60],1.5,[160,160],1)
+addTurret(10,189,180,-15,0.4,-25,[60,60],1.5,[160,160],1)
+addTurret(11,139,-80,8,0.4,-45,[10,10],3.5,[160,160],1)
+addTurret(12,0,-280,42,0.4,0,[60,60],1.5,[160,160],1)
+addTurret(13,0,0,68,0.4,0,[60,60],1.5,[160,160],1)
+addTurret(14,110,130,40,0.4,-20,[10,10],3,[160,160],1)
+addTurret(15,0,-200,42,0.4,0,[60,60],1.5,[160,160],1)
+addTurret(16,150,350,9,0.4,190,[60,60],1.5,[160,160],1)
+addTurret(17,0,450,34,0.4,180,[10,10],4.25,[160,160],1)
+addTurret(18,110,180,40,0.4,-30,[60,60],1.5,[160,160],1)
+addTurret(19,0,-390,-4,0.4,0,[60,60],1.5,[160,160],1)
+addTurret(20,0,99,94,0.4,0,[10,10],3.2,[160,160],1)
+addTurret(21,0,560,30,0.4,180,[60,60],1.5,[160,160],1)
+addTurret(26,150,-530,-31,0.35,0,[60,60],1.5,[160,160],1)
+addTurret(27,120,-560,-28,0.4,0,[10,10],2.5,[160,160],1)
+addTurret(28,120,-510,-25,0.4,0,[10,10],2.5,[160,160],1)
+addTurret(29,135,-350,-16,0.35,0,[60,60],1.5,[160,160],1)
+addTurret(30,170,-360,-28,0.4,0,[10,10],2.5,[160,160],1)
+addTurret(31,160,-310,-25,0.4,0,[10,10],2.5,[160,160],1)
+addTurret(32,195,80,-16,0.35,-20,[60,60],1.5,[160,160],1)
+addTurret(33,210,60,-22,0.4,-20,[10,10],2.5,[160,160],1)
+addTurret(34,180,50,-15,0.4,-20,[10,10],2.5,[160,160],1)
+addTurret(35,50,-710,-21,0.4,-10,[10,10],2.5,[160,160],1)
+addTurret(36,45,-770,-22,0.4,-5,[10,10],2.5,[160,160],1)
+addTurret(37,40,-830,-23,0.4,0,[10,10],2.5,[160,160],1)
+addTurret(38,0,-430,-10,0.6,0,[10,10],2.5,[160,160],1)
+addTurret(39,0,-480,-10,0.5,0,[10,10],2.5,[160,160],1)
+addTurret(40,0,-540,-10,0.4,0,[10,10],2.5,[160,160],1)
+addIonCannon(23,205,-275,-45,0.3,-70,[60,60],1.5,[160,160],1)
+addIonCannon(24,140,-615,-45,0.3,-70,[60,60],1.5,[160,160],1)
+addIonCannon(25,178,-455,-45,0.25,-70,[60,60],1.5,[160,160],1)
+addTrench(41,183,-60,4,0.5,12,[60,60],1.5,[160,160],1)
+addTrench(42,171,-130,4,0.6,12,[60,60],1.5,[160,160],1)
+addTrench(43,146,-230,4,0.5,12,[60,60],1.5,[160,160],1)
+#random function 1
+textures = [3,16,2,2,15,18,17,4]    
+amount = 2.5
+for i in [0..6*amount] by 1.3
+  for j in [0..3] by 1
+    z = (Math.random()-.3)*34.5+zPos
+    y = (Math.random()-.5)*7+yPos
+    model.bodies["box"+i+j] =
+      section_segments: [45,135,225,315]
+      offset:
+        x: i*(3/amount)+4
+        y: i*((0.4)/amount)-540+yPos
+        z: z-j*4-24.3+25+zPos
+      position:
+        x: [0,0,0,0]
+        y: [0,0,10,10]
+        z: [0,0,0,0]
+      width: [0,3,3,0]
+      height: [0,1.5,1.5,0]
+      angle:90
+      texture: [textures[Math.floor(textures.length*Math.random())]]
+#random function 2
+textures = [3,16,2,3,12,17,2]    
+amount = 5
+for i in [0..5*amount] by 1
+  for j in [0..2] by 3
+    z = (Math.random()-.30)*10.5+zPos
+    y = (Math.random()-.3)*6+yPos
+    model.bodies["box1"+i+j] =
+      section_segments: [45,135,225,315]
+      offset:
+        x: i*(5/amount)+2
+        y: i*((0)/amount)+62+yPos
+        z: z-j*2-44.3+158+zPos
+      position:
+        x: [0,0,0,0]
+        y: [0,0,5,5]
+        z: [0,0,0,0]
+      width: [0,4,4,0]
+      height: [0,1,1,0]
+      angle:0
+      texture: [textures[Math.floor(textures.length*Math.random())]]
+#random function 3
+textures = [3,16,2,3,12,17,2]    
+amount = 5
+for i in [0..5*amount] by 1
+  for j in [0..2] by 3
+    z = (Math.random()-.30)*10.5+zPos
+    y = (Math.random()-.3)*6+yPos
+    model.bodies["box2"+i+j] =
+      section_segments: [45,135,225,315]
+      offset:
+        x: i*(5/amount)+2
+        y: i*((0)/amount)-136+yPos
+        z: z-j*2-44.3+116+zPos
+      position:
+        x: [0,0,0,0]
+        y: [0,0,5,5]
+        z: [0,0,0,0]
+      width: [0,4,4,0]
+      height: [0,1,1,0]
+      angle:0
+      texture: [textures[Math.floor(textures.length*Math.random())]]
+#random function 4
+textures = [3,16,2,3,12,17,2]    
+amount = 5
+for i in [0..5*amount] by 1
+  for j in [0..2] by 3
+    z = (Math.random()-.30)*10.5+zPos
+    y = (Math.random()-.3)*6+yPos
+    model.bodies["box3"+i+j] =
+      section_segments: [45,135,225,315]
+      offset:
+        x: i*(5/amount)+2
+        y: i*((0)/amount)-241+yPos
+        z: z-j*2-44.3+86+zPos
+      position:
+        x: [0,0,0,0]
+        y: [0,0,5,5]
+        z: [0,0,0,0]
+      width: [0,4,4,0]
+      height: [0,1,1,0]
+      angle:0
+      texture: [textures[Math.floor(textures.length*Math.random())]]
+return model;
+
+
