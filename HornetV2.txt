@@ -1,0 +1,143 @@
+return model =
+  name: 'Hornet V2' 
+  level: 6
+  model: 6
+  size: 2
+  specs:
+    shield:
+      capacity: [185,255]
+      reload: [8,12]
+    generator:
+      capacity: [150,190]
+      reload: [30,40]
+    ship:
+      mass: 200
+      speed: [90,130]
+      rotation: [120,180]
+      acceleration: [150,230]
+  bodies:
+    main:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -22
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-54,-45,-20,0,20,55,75,78,78]
+        z: [0,0,0,0,0,0,0]
+      width: [0,8,16,18,18,18,18,0,0]
+      height: [0,6,13,15,15,15,15,8,0]
+      texture: [6,2,3,63,11,13,63,3]
+      propeller: false
+    body1:
+      section_segments: 12
+      offset:
+        x: 17
+        y: 15
+        z: -5
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-60,-50,-40,-10,10,30,40,40]
+        z: [0,0,0,0,0,0,0]
+      width: [0,10,10,10,10,10,5,5,5,5,0]
+      height: [0,10,10,10,10,10,5,5,5,5,0]
+      texture: [63,4,18,63,4,3]
+      angle:5
+    cockpit:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -27
+        z: 8
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-31,-23,-5,15,25,25,25]
+        z: [1.38,-0.3,-2,0,5,2,2]
+      width: [0,6,8,8,0,0,0]
+      height: [0,6,12,10,0,0,0]
+      texture: [4,9,9,4,4,3]
+    Det1:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -0
+        z: 11
+      position:
+        x: [0,0,0,0,0]
+        y: [-15,-11,13,30,30]
+        z: [0,0,0,0,0]
+      width: [0,8,8,8,0]
+      height: [0,8,8,8,0]
+      texture: [63,13,10,2,5]
+      angle: 0
+      laser:
+        damage: [1,2]
+        rate: 4
+        type: 1
+        speed: [100,125]
+        number: 1
+        error: 0
+    laser1:
+      section_segments: 12
+      offset:
+        x: 13
+        y: 14
+        z: 1
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-8,-10,0,10,20,25,30,40,50,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,9,10,11,11,11,11,11,10,0]
+      height: [0,9,10,11,11,11,11,11,10,0]
+      texture: [16,1,10,3,63,4,8,13,17]
+      propeller: true
+      laser:
+        damage: [4,4]
+        rate: 5
+        type: 1
+        speed: [160,160]
+        number: 1
+  wings:
+    wing1:
+      doubleside: true
+      offset:
+        x: 5
+        y: 40
+        z: 0
+      length: [0,16,12]
+      width: [40,30,30,15]
+      angle: [0,50,50]
+      position: [0,-9,-5,12]
+      texture: [12,4,63]
+      bump:
+        position: -40
+        size: 3
+    wing2:
+      doubleside: true
+      offset:
+        x: 27
+        y: 18
+        z: -6
+      length: [0,0,0,6]
+      width: [10,10,10,-85,0]
+      angle: [45,45,45,45]
+      position: [-20,-20,-20,-10,-0]
+      texture: [0,18,12,63]
+      bump:
+        position: 3
+        size: 15
+    wing3:
+      doubleside: true
+      offset:
+        x: 22
+        y: 24
+        z: 0
+      length: [0,20,10]
+      width: [0,50,40,50]
+      angle: [0,0,0]
+      position: [0,10,0,-16]
+      texture: [3,11,4]
+      bump:
+        position: 50
+        size: 3
