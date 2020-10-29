@@ -1,0 +1,142 @@
+return model =
+  name: 'Uranium'
+  level: 6
+  model: 1
+  size: 2.4
+  specs:
+    shield:
+      capacity: [300,400]
+      reload: [8,12]
+    generator:
+      capacity: [100,150]
+      reload: [8,14]
+    ship:
+      mass: 475
+      speed: [90,100]
+      rotation: [40,65]
+      acceleration: [70,100]
+  bodies:
+    body:
+      section_segments: 12
+      offset:
+        x: 28
+        y: 10
+        z: 0
+      position:
+        x: [-4,-1,0,0,0,-4,-6,-7,-7,-7]
+        y: [-54,-40,-30,-10,10,30,50,80,90,95]
+        z: [0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,7,11,16,20,20,20,15,0]
+      height: [0,5,10,15,18,18,14,10,6,0]
+      texture: [4,63,4,8,4,63,13,63,4]
+      angle:0
+      propeller: false
+    MainBody:
+      section_segments: 13
+      offset:
+        x: 0
+        y: 20
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-90,-95,-30,12,40,65,70,90,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,15,35,35,30,26,26,25,20,0]
+      height: [0,11,30,28,25,14,13.6,12,11,0]
+      texture: [12,10,63,4,3,5,63,13,17]
+      propeller: true
+      laser:
+        damage: [10,20]
+        rate: 1.5
+        type: 2
+        speed: [160,200]
+        number: 1
+        angle: 0
+        error: 0
+    cockpit:
+      section_segments:6
+      offset:
+        x: 0
+        y: -30
+        z: 24
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-30,-20,0,20,30,40]
+        z: [-10,-12,-7,-3,0,0]
+      width: [0,11,13,13,11,0]
+      height: [0,10,12,14,10,0]
+      texture: [4,9,9,4]
+     propulsor:
+      section_segments: 12
+      offset:
+        x: 53
+        y: 58
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0]
+        y: [-128,-130,-25,0,10,10,25,30,30,40,30]
+        z: [0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,9,13,13,13,13,10,10,9,9,0]
+      height: [0,9,13,13,13,13,10,10,9,9,0]
+      propeller: true
+      texture: [12,2,4,63,63,18,4,5,12,17]
+      laser:
+        damage: [30,50]
+        rate: 1.5
+        type: 2
+        speed: [160,200]
+        number: 1
+        angle: 0
+        error: 0
+        recoil:100
+    wingends:
+      section_segments: 12
+      offset:
+        x: 110
+        y: -25
+        z: -5
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-20,-10,0,10,20,15]
+        z: [0,0,0,0,0,0]
+      width: [2,3,3,3,4,0]
+      height: [5,12,12,12,5,0]
+      texture: [4,63,3,4,17]
+      propeller: true
+      angle: 2
+      laser:
+        damage: [3,5]
+        rate: 4
+        type: 1
+        speed: [150,180]
+        number: 1
+        error: 0
+  wings: 
+    front:
+      doubleside: true
+      offset:
+        x: 14
+        y: -16
+        z: -2
+      length: [0,40,25]
+      width: [0,100,90,140]
+      angle: [0,0,0]
+      position: [0,20,40,70]
+      texture: [1,4,63]
+      bump:
+        position: 50
+        size: 10
+    Winglet2:
+      length: [37]
+      width: [72,15]
+      angle: [-10]
+      position: [0,-45]
+      texture: [3]
+      doubleside: true
+      bump:
+        position: -50
+        size: 2
+      offset:
+        x: 76
+        y:19
+        z: -2

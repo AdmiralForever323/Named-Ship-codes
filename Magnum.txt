@@ -1,0 +1,115 @@
+return model =
+  name: 'Magnum'
+  level: 4
+  model: 24
+  size: 1.2
+  zoom: 1
+  specs:
+    shield:
+      capacity: [175,250]
+      reload: [5,8]
+    generator:
+      capacity: [80,150]
+      reload: [35,50]
+    ship:
+      mass: 200
+      speed: [65,78]
+      rotation: [50,65]
+      acceleration: [120,150]
+  bodies:
+    main:
+      section_segments: 12
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-130,-135,-125,-130,-100,-55,5,40,55,60,58]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,5,13,17,30,30,30,30,17,0]
+      height: [0,5,5,8,15,20,22,22,22,17,0]
+      texture: [17,4,13,3,2,63,4,13,16,17]
+      propeller: true
+      laser:
+        damage: [10,16]
+        rate: 1
+        speed: [150,200]
+        number: 1
+        recoil: 0
+        type: 1
+    cockpit:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -75
+        z: 18
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-16,30,60]
+        z: [-4,-4,-5,-4,0,0,0,0,0,0,0,0]
+      width: [0,9,16,15]
+      height: [0,4,16,12]
+      texture: [4,9,4]
+    cannons:
+      section_segments: 12
+      offset:
+        x: 94
+        y: -65
+        z: -19
+      position:
+        x: [0,0,0,0,0,0,-5]
+        y: [-10.5,-22,-4.5,22.5,22.5,80]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,4.5,4.5,5,9,9]
+      height: [0,4.5,4.5,5,9,9]
+      texture: [17,4,3]
+      laser:
+        damage: [9,10]
+        rate: 1.5
+        speed: [100,150]
+        number: 1
+        recoil: 25
+        type: 2
+    propulsors:
+      section_segments: 12
+      offset:
+        x: 70
+        y: -10
+        z: -9
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-49,-47,-40,20,50,48]
+        z: [5,5,5,0,0,0,0,0,0,0,0,0,0]
+      width: [0,3.5999999999999996,10,13,11.399999999999999,0]
+      height: [0,3.5999999999999996,10,14,12.399999999999999,0]
+      texture: [7,12,8,13,17]
+      propeller: true
+    Edge:
+      section_segments: [0,50,120,180]
+      offset:
+        x: -20
+        y: -110
+        z: 0
+      position:
+        x: [10,10,4,0,0,0]
+        y: [-44,-25,40,180,180]
+        z: [0,0,0,0,0,0]
+      width: [0,10,20,20,0]
+      height: [0,6,15,15,10]
+      texture: [3,2,11,15.6]
+  wings:
+    main:
+      doubleside: true
+      offset:
+        x: 20
+        y: 0
+        z: 0
+      length: [84,0]
+      width: [80,40]
+      angle: [-12,-12]
+      position: [0,-10,80]
+      texture: 12
+      bump:
+        position: 0
+        size: 4
