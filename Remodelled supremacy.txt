@@ -1,0 +1,943 @@
+
+Array::mult = (m) -> @map (v) -> v*m
+Array::add = (m) -> @map (v) -> v+m
+
+for key, value of []
+  delete Array::[key]
+  Object.defineProperty Array::, key,
+    value: value
+    configurable: true
+    enumerable: false
+
+addTurret = (n, xpos, ypos, zpos, size, angle, dmg, rt, spd, nmbr) ->
+  model.bodies['turretBase'+n] =
+    section_segments: 15
+    offset:
+      x: xpos+(10*size)
+      y: zpos+(56*size)
+      z: -ypos+(-3*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-16,-16,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,15,15,0].mult(size)
+    height: [0,15,15,0].mult(size)
+    texture: [16,10,16]
+    vertical: true
+    angle:90
+  model.bodies['turret'+n] =
+    section_segments: [0,0,0,0,0,0,0,0,0,0]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos+(70.5*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-17,-15,-10,10,15,15].mult(size)
+      z: [0,0,0,0,5,8].mult(size)
+    width: [0,9,14,16,6,0].mult(size)
+    height: [0,3,5,5,3,0].mult(size)
+    texture: [4,4,18,4,13].add(-0.09)
+    angle: angle
+  model.bodies['gunMiddle'+n] =
+    section_segments: 10
+    offset:
+      x: xpos+(-6*size)
+      y: ypos+(15*size)
+      z: zpos+(63.5*size)
+    position:
+      x: [0,0,0,0,0,0,0,0].add(7*size)
+      y: [-37,-47,-60,-40,-32,-12,-10,-2].mult(size)
+      z: [0,0,0,0,0,0,0,0]
+    width: [0,6,6,5,5,5,5,0].mult(size)
+    height: [0,6,6,5,5,7,7,0].mult(size)
+    texture: [17,4,4,13,3,10,3]
+  
+    angle: angle
+    laser:
+      damage: dmg
+      rate: rt
+      speed: spd
+      number: nmbr
+         
+  
+model =
+  name: 'Turret'
+  level: 7
+  model: 6
+  size: 4.3
+  zoom: 1.1
+  specs:
+    shield:
+      capacity: [800,1200]
+      reload: [13,20]
+    generator:
+      capacity: [400,600]
+      reload: [300,580]
+    ship:
+      mass: 1000
+      speed: [90,120]
+      rotation: [8,16]
+      acceleration: [12,25]
+  bodies:
+    base:
+      section_segments: 0
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      position:
+        x: [0]
+        y: [0]
+        z: [0]
+      width: [1]
+      height: [1]
+
+model =
+  name: 'Supremacy'
+  level: 7
+  model: 3
+  size: 8
+  specs:
+    shield:
+      capacity: [15000000,15000000]
+      reload: [10000,10000]
+    generator:
+      capacity: [50000,50000]
+      reload: [1000,1000]
+    ship:
+      mass: 150000
+      speed: [70,70]
+      rotation: [3,3]
+      acceleration: [60,60]
+  bodies:
+    propulsor1:
+      section_segments: 8
+      offset:
+        x: 10
+        y: 120
+        z: -12
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor2:
+      section_segments: 8
+      offset:
+        x: 30
+        y: 115
+        z: -13
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor3:
+      section_segments: 8
+      offset:
+        x: 50
+        y: 110
+        z: -14
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,10,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor4:
+      section_segments: 8
+      offset:
+        x: 105
+        y: 100
+        z: -6
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor5:
+      section_segments: 8
+      offset:
+        x: 90
+        y: 105
+        z: -8
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor6:
+      section_segments: 8
+      offset:
+        x: 10
+        y: 75
+        z: -23
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,10,15,0,0,0]
+      width: [0,0,5,5,5,0]
+      height: [0,0,5,5,5,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor7:
+      section_segments: 8
+      offset:
+        x: 30
+        y: 70
+        z: -22
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,10,15,0,0,0]
+      width: [0,0,5,5,5,0]
+      height: [0,0,5,5,5,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor8:
+      section_segments: 8
+      offset:
+        x: 45
+        y: 65
+        z: -21
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,10,15,0,0,0]
+      width: [0,0,5,5,5,0]
+      height: [0,0,5,5,5,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor9:
+      section_segments: 8
+      offset:
+        x: 160
+        y: 45
+        z: -16
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor10:
+      section_segments: 8
+      offset:
+        x: 175
+        y: 45
+        z: -18
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor10:
+      section_segments: 8
+      offset:
+        x: 175
+        y: 45
+        z: -18
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor11:
+      section_segments: 8
+      offset:
+        x: 190
+        y: 45
+        z: -19
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor12:
+      section_segments: 8
+      offset:
+        x: 280
+        y: 50
+        z: -28
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor13:
+      section_segments: 8
+      offset:
+        x: 295
+        y: 50
+        z: -29
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor14:
+      section_segments: 8
+      offset:
+        x: 435
+        y: 60
+        z: -42
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor15:
+      section_segments: 8
+      offset:
+        x: 450
+        y: 63
+        z: -43
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+    propulsor16:
+      section_segments: 8
+      offset:
+        x: 465
+        y: 66
+        z: -44
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,10,20,30,60,50]
+        z: [0,0,0,0,0,0]
+      width: [0,0,7,7,7,0]
+      height: [0,0,7,7,7,0]
+      texture: [10,12,12,12,17]
+      propeller: true
+     City1:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 0
+        y: 15
+        z: 22
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,80,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City2:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 10
+        y: 19
+        z: 22
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,80,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City3:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 18
+        y: 15
+        z: 21
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [70,70,60,60,60,60,60,90,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City4:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 26
+        y: 15
+        z: 19.8
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,95,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City5:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 36
+        y: 15
+        z: 19.5
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,80,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City6:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 46
+        y: 22
+        z: 17.5
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,75,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City7:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 56
+        y: 29
+        z: 16.1
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,72,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City8:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 66
+        y: 35
+        z: 14.99
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,68,60,40]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City9:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 0
+        y: -10
+        z: 23
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,37,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City10:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 10
+        y: -10
+        z: 22
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,40,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City11:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 20
+        y: -10
+        z: 22
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,43,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City12:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 30
+        y: -10
+        z: 22
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,47,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City13:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 95
+        y: 55
+        z: 12
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,30,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City14:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 105
+        y: 55
+        z: 11
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,33,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City15:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 115
+        y: 56
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,35,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City16:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 125
+        y: 57
+        z: 9
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,36,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City17:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 135
+        y: 57
+        z: 8
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,38,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+     City18:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 145
+        y: 57
+        z: 7
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [60,60,60,60,60,60,60,43,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,4,4,4,4,4,4,4,4,4]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [16,16,16,18,18,18]
+    Main_Bridge1:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 0
+        y: 105
+        z: 23
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [10,10,10,10,10,10,14,12,12,12]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,2,2,8,8,8,8,8,8,0]
+      height: [0,0.3,0.3,1,1,1,1,1,1,0]
+      texture: [17,17,2,4,4,11]
+  wings: 
+   wing1:
+    doubleside: true
+    offset:
+      x: 0
+      y: -25
+      z: 5
+    length: [625]
+    width: [180,70,40]
+    angle: [-5,20]
+    position: [55,140,85]
+    texture:10
+    bump:
+      position: 63
+      size: 5.8
+   wing2:
+    doubleside: true
+    offset:
+      x: 0
+      y: -30
+      z: 15
+    length: [235]
+    width: [170,60,40]
+    angle: [-6,20]
+    position: [90,140,85]
+    texture: 2
+    bump:
+      position: -48
+      size: 1
+   wing3:
+    doubleside: true
+    offset:
+      x: 229
+      y: 36
+      z: -8.4
+    length: [385]
+    width: [54,54,60]
+    angle: [-5,20]
+    position: [70,80,85]
+    texture: 2
+    bump:
+      position: -48
+      size: 1
+   wing4:
+    doubleside: true
+    offset:
+      x: 0
+      y: 150
+      z: 12
+    length: [135]
+    width: [96,50,40]
+    angle: [-6,20]
+    position: [-50,10,85]
+    texture: 13
+    bump:
+      position: -48
+      size: 0
+   wing5:
+    doubleside: true
+    offset:
+      x: 0
+      y: -50
+      z: 20
+    length: [100]
+    width: [46,30,40]
+    angle: [-6,20]
+    position: [80,110,85]
+    texture: 1
+    bump:
+      position: -48
+      size: 1
+   wing6:
+    doubleside: true
+    offset:
+      x: 0
+      y: 20
+      z: 19
+    length: [230]
+    width: [96,30,40]
+    angle: [-6,20]
+    position: [70,100,85]
+    texture:1
+    bump:
+      position: -48
+      size: 1
+   wing7:
+    doubleside: true
+    offset:
+      x: 0
+      y: 250
+      z: 17
+    length: [100]
+    width: [66,30,40]
+    angle: [-6,20]
+    position: [-80,-100,85]
+    texture: 1
+    bump:
+      position: -48
+      size: 0
+   wing8:
+    doubleside: true
+    offset:
+      x: 0
+      y: -6
+      z: 22
+    length: [40]
+    width: [30,30,40]
+    angle: [-6,20]
+    position: [47,60,85]
+    texture: 4
+    bump:
+      position: -48
+      size: 1
+   wing9:
+    doubleside: true
+    offset:
+      x: 0
+      y: 20
+      z: 21
+    length: [70]
+    width: [60,30,40]
+    angle: [-6,20]
+    position: [37,71,85]
+    texture: 4
+    bump:
+      position: -48
+      size: 1
+   wing10:
+    doubleside: true
+    offset:
+      x: 0
+      y: -6
+      z: 22
+    length: [40]
+    width: [30,30,40]
+    angle: [-6,20]
+    position: [47,60,85]
+    texture: 4
+   wing10:
+    doubleside: true
+    offset:
+      x: 0
+      y: 53
+      z: 22.3
+    length: [50]
+    width: [3,3,40]
+    angle: [-6,20]
+    position: [0,0,0]
+    texture: 1
+    bump:
+      position: -48
+      size: 1
+   wing11:
+    doubleside: true
+    offset:
+      x: 0
+      y: 14
+      z: 20
+    length: [30]
+    width: [30,20,40]
+    angle: [-6,20]
+    position: [67,91,85]
+    texture: 4
+    bump:
+      position: -48
+      size: 1
+   wing12:
+    doubleside: true
+    offset:
+      x: 0
+      y: 200
+      z: 21
+    length: [50]
+    width: [36,10,40]
+    angle: [-6,20]
+    position: [-80,-60,85]
+    texture: 2
+    bump:
+      position: -48
+      size: 0
+   wing13:
+    doubleside: true
+    offset:
+      x: 30
+      y: 198
+      z: 19
+    length: [20]
+    width: [46,10,40]
+    angle: [-6,20]
+    position: [-80,-60,85]
+    texture: 2
+    bump:
+      position: -48
+      size: 0
+   wing14:
+    doubleside: true
+    offset:
+      x: 90
+      y: 168
+      z: 11
+    length: [60]
+    width: [36,20,40]
+    angle: [-6,20]
+    position: [-70,-60,85]
+    texture: 4
+    bump:
+      position: -48
+      size: 0
+   wing15:
+    doubleside: true
+    offset:
+      x: 400
+      y: 188
+      z: -23
+    length: [20]
+    width: [36,0,40]
+    angle: [-6,20]
+    position: [-60,-50,85]
+    texture: 3
+    bump:
+      position: -48
+      size: 0
+   wing16:
+    doubleside: true
+    offset:
+      x: 400
+      y: 188
+      z: -23
+    length: [-20]
+    width: [36,0,40]
+    angle: [-6,20]
+    position: [-60,-50,85]
+    texture: 3
+    bump:
+      position: -48
+      size: 0
+   wing17:
+    doubleside: true
+    offset:
+      x: 450
+      y: 188
+      z: -23
+    length: [20]
+    width: [36,0,40]
+    angle: [-6,20]
+    position: [-60,-50,85]
+    texture: 3
+    bump:
+      position: -48
+      size: 0
+   wing18:
+    doubleside: true
+    offset:
+      x: 450
+      y: 188
+      z: -23
+    length: [-20]
+    width: [36,0,40]
+    angle: [-6,20]
+    position: [-60,-50,85]
+    texture: 3
+    bump:
+      position: -48
+      size: 0
+   wing19:
+    doubleside: true
+    offset:
+      x: 500
+      y: 188
+      z: -27
+    length: [20]
+    width: [36,0,40]
+    angle: [-6,20]
+    position: [-60,-50,85]
+    texture: 3
+    bump:
+      position: -48
+      size: 0
+   wing20:
+    doubleside: true
+    offset:
+      x: 500
+      y: 188
+      z: -27
+    length: [-20]
+    width: [36,0,40]
+    angle: [-6,20]
+    position: [-60,-50,85]
+    texture: 3
+    bump:
+      position: -48
+      size: 0
+      
+      
+      
+addTurret(1,10,19,14,.1,2,[260,260],3.5,[300,300],1)
+
+addTurret(2,25,25,12,.1,4,[260,260],2,[300,300],1)
+
+addTurret(3,40,30,11,.1,7,[260,260],2.25,[300,300],1)
+
+addTurret(4,55,34,9.5,.1,10,[260,260],1.50,[300,300],1)
+
+addTurret(5,70,40,7.5,.1,13,[260,260],1.75,[300,300],1)
+
+addTurret(6,85,45,5.7,.1,16,[260,260],2,[300,300],1)
+
+addTurret(7,10,-10,11,.1,2,[60,60],5,[300,300],1)
+
+addTurret(8,25,-5,9,.1,4,[60,60],5,[300,300],1)
+
+addTurret(9,40,0,7,.1,7,[60,60],5,[300,300],1)
+
+addTurret(10,55,5,5,.1,10,[60,60],5,[300,300],1)
+
+addTurret(11,70,11,3.5,.1,13,[60,60],5,[300,300],1)
+
+addTurret(12,85,17,1.7,.1,16,[60,60],5,[300,300],1)
+
+addTurret(13,95,0,-7,.1,0,[60,60],5,[300,300],1)
+
+addTurret(14,115,0,-8,.1,0,[60,60],5,[300,300],1)
+
+addTurret(15,135,0,-9,.1,0,[60,60],5,[300,300],1)
+
+addTurret(16,155,0,-10,.1,0,[60,60],5,[300,300],1)
+
+addTurret(17,175,0,-11,.1,0,[60,60],5,[300,300],1)
+
+addTurret(18,195,0,-12,.1,0,[60,60],5,[300,300],1)
+
+addTurret(19,95,0,-7,.1,0,[60,60],5,[300,300],1)
+
+addTurret(20,115,0,-8,.1,0,[60,60],5,[300,300],1)
+
+addTurret(21,135,0,-9,.1,0,[60,60],5,[300,300],1)
+
+addTurret(22,155,0,-10,.1,0,[60,60],5,[300,300],1)
+
+addTurret(23,175,0,-11,.1,0,[60,60],5,[300,300],1)
+
+addTurret(24,195,0,-12,.1,0,[60,60],5,[300,300],1)
+
+
+return model;

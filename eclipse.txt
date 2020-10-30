@@ -1,0 +1,523 @@
+Array::mult = (m) -> @map (v) -> v*m
+Array::add = (m) -> @map (v) -> v+m
+
+for key, value of []
+  delete Array::[key]
+  Object.defineProperty Array::, key,
+    value: value
+    configurable: true
+    enumerable: false
+
+addTurret = (n, xpos, ypos, zpos, size, angle, dmg, rt, spd, nmbr) ->
+  model.bodies['turretBase'+n] =
+    section_segments: 9
+    offset:
+      x: xpos
+      y: zpos+(70.5*size)
+      z: -ypos
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-15,-15,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,22,18,0].mult(size)
+    height: [0,22,18,0].mult(size)
+    texture: [18,18,17]
+    vertical: true
+  
+  model.bodies['turret'+n] =
+    section_segments: [0,45,60,120,135,180,225,240,300,315]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos+(70.5*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-17,-15,-10,10,15,15].mult(size)
+      z: [0,0,0,0,5,8].mult(size)
+    width: [0,9,14,16,6,0].mult(size)
+    height: [0,3,5,5,3,0].mult(size)
+    texture: [4,4,4,4,4].add(-0.09)
+    angle: angle
+  model.bodies['gunRight'+n] =
+    section_segments: 10
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos+(70.5*size)
+    position:
+      x: [0,0,0,0,0,0,0,0].add(7*size)
+      y: [-47,-47,-40,-40,-32,-32,-10,-2].mult(size)
+      z: [0,0,0,0,0,0,0,0]
+    width: [0,2,2,1,1,2,3,0].mult(size)
+    height: [0,2,2,1,1,2,3,0].mult(size)
+    texture: [17,4,4,13,4,3,3]
+    angle: angle
+    laser:
+      damage: dmg
+      rate: rt
+      speed: spd
+      number: nmbr
+  model.bodies['gunLeft'+n] =
+    section_segments: 10
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos+(70.5*size)
+    position:
+      x: [0,0,0,0,0,0,0,0].add(-7*size)
+      y: [-47,-47,-40,-40,-32,-32,-10,-2].mult(size)
+      z: [0,0,0,0,0,0,0,0]
+    width: [0,2,2,1,1,2,3,0].mult(size)
+    height: [0,2,2,1,1,2,3,0].mult(size)
+    texture: [17,4,4,13,4,3,3]
+    angle: angle
+    laser:
+      damage: dmg
+      rate: rt
+      speed: spd
+      number: nmbr
+model =
+  name: 'Turret'
+  level: 7
+  model: 6
+  size: 4.3
+  zoom: 1.1
+  specs:
+    shield:
+      capacity: [800,1200]
+      reload: [13,20]
+    generator:
+      capacity: [400,600]
+      reload: [300,580]
+    ship:
+      mass: 1000
+      speed: [90,120]
+      rotation: [8,16]
+      acceleration: [12,25]
+  bodies:
+    base:
+      section_segments: 0
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      position:
+        x: [0]
+        y: [0]
+        z: [0]
+      width: [1]
+      height: [1]
+model =
+  name: 'Eclipse_1'
+  level: 6
+  model: 3
+  size: 1.3
+  specs:
+    shield:
+      capacity: [40000,40000]
+      reload: [300,300]
+    generator:
+      capacity: [50000,50000]
+      reload: [2500,2500]
+    ship:
+      mass: 30000
+      speed: [60,60]
+      rotation: [4,4]
+      acceleration: [100,100]
+  bodies:
+    cockpit:
+      angle: 0
+      section_segments: 0
+      offset:
+        x: 0
+        y: -20
+        z: 12
+      position:
+        x: [0,0,0,0,0]
+        y: [-20,-10,0,10,20]
+        z: [-7,-3,0,5,3]
+      width: [3,12,18,16,3]
+      height: [3,6,8,6,3]
+      texture: [9]
+    cockpit2:
+      angle: 0
+      section_segments: 0
+      offset:
+        x: 0
+        y: -10
+        z: 12
+      position:
+        x: [0,0,0,0]
+        y: [-10,0,10,40]
+        z: [0,0,5,3]
+      width: [5,18,16,3]
+      height: [5,12,10,5]
+      texture: [9,2,11]
+     main1:
+      section_segments: 20
+      offset:
+        x: 10
+        y: -1010
+        z: -143
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-44,-43,-21.5,0,21.5,43,44]
+        z: [0,0,0,0,0,0,0]
+      width: [0,15,35,42.5,35,15,0]
+      height:  [0,15,35,42.5,35,15,0]
+      texture: [18,18,18,18,18,18]
+      propeller: false
+      angle:0
+     Axial_SuperLaser1:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -1070
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-70,-90,-54,-50,-44,-40,0,70,1300,75,83,88]
+        z: [-3,-5,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,15,17,18,18,21,10,10,10,10,0]
+      height: [0,5,10,10,10,10,10,10,10,10,10,0]
+      texture: [17,4,4,4,4,4,4,17,4,4,4]
+      laser:
+        damage: [40,40]
+        rate: 1
+        type: 2
+        speed: [250,250]
+        number: 200
+        error: 0
+        recoil: 2
+        angle: 0
+     Axial_SuperLaser2:
+      section_segments: 6
+      offset:
+        x: 0
+        y: -1060
+        z: -140
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-100,-90,-54,-50,-44,-40,0,70,80,75,830,1580]
+        z: [-3,-7,0,0,0,0,0,0,0,0,60,70,40,50,30]
+      width: [0,0,9,14,20,21,30,40,40,40,50,0]
+      height: [0,140,150,150,155,155,155,150,150,140,65,42]
+      texture: [3.99,4,4,4,4,4,4,4,4,4,4]
+     Axial_SuperLaser3:
+      section_segments: 4
+      offset:
+        x: 0
+        y: -1070
+        z: -30
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-90,-90,-54,-50,-44,-40,0,70,70,75,83,88]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,15,17,18,18,21,10,10,10,10,0]
+      height: [0,5,10,10,10,10,10,10,10,10,10,0]
+      texture: [4,4,4,4,4,4,4,4,4,4,4]
+     Axial_SuperLaser4:
+      section_segments: 4
+      offset:
+        x: 0
+        y: -1070
+        z: -60
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-90,-90,-54,-50,-44,-40,0,70,70,75,83,88]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,15,17,18,18,21,10,10,10,10,0]
+      height: [0,5,10,10,10,10,10,10,10,10,10,0]
+      texture: [4,4,4,4,4,4,4,4,4,4,4]
+     Axial_SuperLaser_antenai:
+      section_segments: 2
+      offset:
+        x: 0
+        y: -1070
+        z: -330
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-10,-10,-10,-10,-10,-10,0,10,10,10,10,10]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,15,17,18,18,21,10,10,10,10,0]
+      height: [0,80,80,80,80,80,80,80,80,80,80,0]
+      texture: [4,4,4,4,4,4,4,4,4,4,4]
+     section_connector1:
+      section_segments: 10
+      offset:
+        x: 290
+        y: 5
+        z: -85
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-900,-1000,10,10,200,300,300,600,900,900]
+        z: [50,50,30,35,34,32,32,26,26,26]
+      width: [0,5,5,5,5,5,5,5,5,0]
+      height: [30,35,22,23,20,18,16,14,6,0]
+      propeller: false
+      texture: [18,18,18,18,18,18,18,18,18]
+      angle:17.7
+     section_connector2:
+      section_segments: 10
+      offset:
+        x: 66
+        y: 220
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-150,-100,700,0,0,0,0,0,0,0]
+        z: [0,0,-35,-35,-35,-35,-35,-35,-35,0]
+      width: [0,5,5,5,5,5,5,5,5,0]
+      height: [10,10,10,10,10,10,10,10,10,0]
+      propeller: false
+      texture: [17,17,17,17,17,18,18,18,18]
+      angle:24
+     section_connector3:
+      section_segments: 10
+      offset:
+        x: 10
+        y: 220
+        z:-50
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-10,-20,650,0,0,0,0,0,0,0]
+        z: [55,55,35,55,55,55,55,55,55,55]
+      width: [0,5,5,5,5,5,5,5,5,0]
+      height: [10,10,10,10,10,10,10,10,10,0]
+      propeller: false
+      texture: [17,17,17,17,17,18,18,18,18]
+      angle:23
+     section_connector4:
+      section_segments: 10
+      offset:
+        x: 0
+        y: 1040
+        z: -45
+      position:
+        x: [120,120,0,-60,0,0,0,0,120,120]
+        y: [-200,-550,-200,0,200,200,200,200,550,0]
+        z: [0,-15,0,0,0,0,0,0,-15,0]
+      width: [0,5,5,5,5,5,5,5,5,0]
+      height: [0,7,25,43,30,30,30,30,7,0]
+      propeller: false
+      texture: [18,18,18,18,18,18,18,18,18]
+      angle:90
+     Detail1:
+      section_segments: 6
+      offset:
+        x: 24
+        y: -1010
+        z: -90
+      position:
+        x: [-10,-10,-10,-10,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-50,-50,-50,-50,-50,-50,50,50,50,50,50,50]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,5,5,5,5,5,5,5,5,5,0]
+      height: [0,2,2,2,2,2,2,2,2,2,2,0]
+      texture: [17,17,17,17,17,17,17,17,17,17,17]
+     Detail2:
+      section_segments: 6
+      offset:
+        x: 32
+        y: -900
+        z: -140
+      position:
+        x: [-10,-10,-10,-10,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-90,-90,-90,-90,-90,-90,90,90,90,90,90,90]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,5,5,5,5,5,5,5,5,5,0]
+      height: [0,2,2,2,2,2,2,2,2,2,2,0]
+      texture: [17,17,17,17,17,17,17,17,17,17,17]
+     Detail3:
+      section_segments: 2
+      offset:
+        x: -6
+        y: -1150
+        z: -150
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-10,-10,-10,-10,-10,-10,20,20,20,20,20,20]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,8,8,8,8,8,8,8,8,8,8,0]
+      height: [0,20,20,20,20,20,20,20,20,20,20,0]
+      texture: [17,17,17,17,17,16.7,17,17,17,17,17]
+      angle:90
+     Detail4:
+      section_segments: 6
+      offset:
+        x: 32
+        y: -840
+        z: -110
+      position:
+        x: [-10,-10,-10,-10,0,0,0,0,0,0,0,0,0,0,0]
+        y: [-120,-120,-120,-120,-120,-120,90,90,90,90,90,90]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,5,5,5,5,5,5,5,5,5,0]
+      height: [0,2,2,2,2,2,2,2,2,2,2,0]
+      texture: [17,17,17,17,17,17,17,17,17,17,17]
+     propulsor1:
+      section_segments: 10
+      offset:
+        x: 0
+        y: 1085
+        z: -70
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,-300,-200,30,10,0]
+        z: [0,0,0,0,0]
+      width: [20,20,20,20,0]
+      height: [20,20,20,20,20,0]
+      texture: [13,13,4,17,12]
+      propeller: true
+     propulsor2:
+      section_segments: 10
+      offset:
+        x: 100
+        y: 1085
+        z: -65
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,-300,-200,30,10,0]
+        z: [0,0,0,0,0]
+      width: [20,20,20,20,0]
+      height: [20,20,20,20,20,0]
+      texture: [13,13,4,17,12]
+      propeller: true
+  wings:
+   wings_1:
+    doubleside: true
+    offset:
+      x: 7
+      y: -65
+      z: 5
+    length: [600]
+    width: [2290,0,40]
+    angle: [-6,20]
+    position: [57,1000,85]
+    texture: 4
+    bump:
+      position: 30
+      size: 0
+   wings_2:
+    doubleside: true
+    offset:
+      x: 7
+      y: -69
+      z: -77
+    length: [600]
+    width: [2210,0,40]
+    angle: [0,20]
+    position: [57,1000,85]
+    texture: 4
+    bump:
+      position: 30
+      size: 0
+   wing_3:
+    doubleside: true
+    offset:
+      x: 0
+      y: -80
+      z: 5
+    length: [20]
+    width: [-2290,-2250,40]
+    angle: [0,20]
+    position: [89,90,85]
+    texture: 4
+    bump:
+      position: 0
+      size: 0
+   wing_4:
+    doubleside: true
+    offset:
+      x: 0
+      y: -80
+      z: -77
+    length: [20]
+    width: [-2210,-2250,40]
+    angle: [0,20]
+    position: [89,90,85]
+    texture: 4
+    bump:
+      position: 0
+      size: 0
+   wings_5:
+    doubleside: true
+    offset:
+      x: 0
+      y: 515
+      z: 12
+    length: [389]
+    width: [1020,0,40]
+    angle: [-6,20]
+    position: [57,430,85]
+    texture: 4
+    bump:
+      position: 30
+      size: 0
+   wings_6:
+    doubleside: true
+    offset:
+      x: 0
+      y:445
+      z: 17
+    length: [249]
+    width: [620,0,40]
+    angle: [-6,20]
+    position: [57,330,85]
+    texture: 4
+    bump:
+      position: 30
+      size: 0
+      
+      
+addTurret(0,310,0,-52,0.5,5,[10,10],3,[360,360],1)
+addTurret(1,330,60,-53,0.5,5,[10,10],3,[360,360],1)
+addTurret(2,350,120,-54,0.5,5,[10,10],4,[360,360],1)
+addTurret(3,370,180,-55,0.5,5,[10,10],3,[360,360],1)
+
+addTurret(4,310,240,-52,0.5,5,[10,10],3,[360,360],1)
+addTurret(5,330,300,-53,0.5,5,[10,10],3,[360,360],1)
+addTurret(6,350,360,-54,0.5,5,[10,10],4,[360,360],1)
+addTurret(7,370,420,-55,0.5,5,[10,10],3,[360,360],1)
+
+addTurret(8,310,480,-52,0.5,5,[10,10],3,[360,360],1)
+addTurret(9,330,540,-53,0.5,5,[10,10],3,[360,360],1)
+addTurret(10,350,600,-54,0.5,5,[10,10],4,[360,360],1)
+addTurret(11,370,660,-55,0.5,5,[10,10],3,[360,360],1)
+
+addTurret(12,175,-120,-40,0.5,5,[10,10],3,[360,360],1)
+addTurret(13,160,-160,-40,0.5,5,[10,10],3,[360,360],1)
+addTurret(14,140,-200,-40,0.5,5,[10,10],4,[360,360],1)
+addTurret(15,120,-240,-37,0.5,5,[10,10],3,[360,360],1)
+
+addTurret(16,100,-290,-35,0.5,5,[10,10],3,[360,360],1)
+addTurret(17,130,-330,-35,0.5,5,[10,10],3,[360,360],1)
+addTurret(18,150,-390,-35,0.5,5,[10,10],4,[360,360],1)
+addTurret(19,170,-450,-35,0.5,5,[10,10],3,[360,360],1)
+
+addTurret(20,160,-580,-37,0.5,5,[10,10],3,[360,360],1)
+addTurret(21,140,-640,-35,0.5,5,[10,10],3,[360,360],1)
+addTurret(22,120,-700,-33,0.5,5,[10,10],4,[360,360],1)
+addTurret(23,100,-760,-32,0.5,5,[10,10],3,[360,360],1)
+
+addTurret(24,140,-570,-104,0.5,-50,[10,10],3,[360,360],1)
+addTurret(25,120,-640,-105,0.5,-50,[10,10],3,[360,360],1)
+addTurret(26,100,-700,-103,0.5,-50,[10,10],4,[360,360],1)
+addTurret(27,80,-760,-102,0.5,-50,[10,10],3,[360,360],1)
+
+addTurret(28,240,-270,-104,0.5,-50,[10,10],3,[360,360],1)
+addTurret(29,220,-340,-105,0.5,-50,[10,10],3,[360,360],1)
+addTurret(30,200,-400,-103,0.5,-50,[10,10],4,[360,360],1)
+addTurret(31,180,-460,-102,0.5,-50,[10,10],3,[360,360],1)
+
+addTurret(32,330,20,-104,0.5,-50,[10,10],3,[360,360],1)
+addTurret(33,310,-40,-105,0.5,-50,[10,10],3,[360,360],1)
+addTurret(34,290,-100,-103,0.5,-50,[10,10],4,[360,360],1)
+addTurret(35,270,-160,-102,0.5,-50,[10,10],3,[360,360],1)
+
+addTurret(36,370,200,-104,0.5,-50,[10,10],3,[360,360],1)
+addTurret(37,390,260,-105,0.5,-50,[10,10],3,[360,360],1)
+addTurret(38,410,320,-103,0.5,-50,[10,10],4,[360,360],1)
+addTurret(39,430,380,-102,0.5,-50,[10,10],3,[360,360],1)
+
+return model;

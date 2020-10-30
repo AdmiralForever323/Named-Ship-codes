@@ -1,0 +1,174 @@
+return model =
+  name: 'Slave One'
+  level: 6
+  model: 6
+  size: 2.0
+  specs:
+    shield:
+      capacity: [300,450]
+      reload: [4,7]
+    generator:
+      capacity: [250,450]
+      reload: [50,100]
+    ship:
+      mass: 300
+      speed: [70,100]
+      rotation: [50,70]
+      acceleration: [70,140]
+  bodies:
+    main:
+      section_segments: 80
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0]
+        y: [-50,-50,-20,20,20,50,80,90,85]
+        z: [-100,-130,-40,0,0,0,0,0,0,0]
+      width: [24,23,25,35,35,50,65,35,0]
+      height: [0,20,60,60,50,90,125,10,0]
+      texture: [3,12,12,2,63,63,2,17]
+      propeller: true
+    cockpit:
+      section_segments: 45
+      offset:
+        x: 0
+        y: 35
+        z: 55
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-30,-20,0,30,40]
+        z: [0,0,0,0,0]
+      width: [0,10,15,25,30,20,15]
+      height: [4,30,45,60,65]
+      texture: [9,9,9,1,0]
+      propeller: false
+    BlasterCannons1:
+      section_segments: 12
+      offset:
+        x: 30
+        y: -60
+        z: -125
+      position:
+        x: [0,0,0,0,0]
+        y: [-30,-20,0,20,30]
+        z: [0,0,0,0,0]
+      width: [2,5,2,2,2,0]
+      height: [2,5,5,5,5]
+      texture: [10,4,4,4]
+      angle: 0
+      laser:
+        damage: [6,12]
+        rate: 7
+        type: 1
+        speed: [100,170]
+        number: 1
+        error: 0
+    MediumPulse:
+      section_segments: 12
+      offset:
+        x: 21
+        y: -40
+        z: -130
+      position:
+        x: [0,0,0,0,0]
+        y: [-10,-20,0,0,0]
+        z: [0,0,0,0,0]
+      width: [2,5,2,2,2,0]
+      height: [2,5,5,5,5]
+      texture: [17,4,4,4]
+      angle: 0
+      laser:
+        damage: [10,20]
+        rate: 4
+        type: 1
+        speed: [100,150]
+        number: 1
+        error: 0
+    BlasterCannons2:
+      section_segments: 12
+      offset:
+        x: 30
+        y: -60
+        z: -135
+      position:
+        x: [0,0,0,0,0]
+        y: [-30,-20,0,20,30]
+        z: [0,0,0,0,0]
+      width: [2,5,2,2,2,0]
+      height: [2,5,5,5,5]
+      texture: [10,4,4,4]
+      angle: 0
+      laser:
+        damage: [6,12]
+        rate: 7
+        type: 1
+        speed: [100,170]
+        number: 1
+        error: 0
+    IonCannons3:
+      section_segments: 12
+      offset:
+        x: 25
+        y: 40
+        z: 33
+      position:
+        x: [0,0,0,0,0]
+        y: [-45,-20,0,20,30]
+        z: [0,0,0,0,0]
+      width: [2,5,5,6]
+      height: [2,5,5,5,5]
+      texture: [18,10,4,4,6]
+      angle: 0
+      laser:
+        damage: [15,20]
+        rate: 3
+        type: 1
+        speed: [100,160]
+        number: 1
+        error: 0
+    ControlSurfaces:
+      section_segments: 50
+      offset:
+        x: 15
+        y: 39
+        z: 48
+      position:
+        x: [0,0,0,0,0]
+        y: [-120,-20,0,20,30]
+        z: [0,0,0,0,0]
+      width:[2,5,25,5,5,5,5,5,5,5,5,6]
+      height: [20,5,25,5,5]
+      texture: [12,2,10,2,2]
+      angle: 90
+    engines3:
+      section_segments: 12
+      offset:
+        x: 14
+        y: 75
+        z:-35
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-30,-20,0,20,30,20]
+        z: [0,0,0,0,0,0]
+      width: [5,10,10,10,15,0]
+      height: [5,25,30,25,15,1]
+      propeller: true
+      texture: [1,17,1,10]
+      angle: 0
+    sensor:
+      section_segments: 12
+      offset:
+        x: 0
+        y: 60
+        z: 70
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-30,-20,0,20,30,20]
+        z: [0,0,0,0,0,0]
+      width: [5,15,10,15,35,1]
+      height: [5,25,30,25,35,1]
+      propeller: false
+      texture: [1,17,1,10]
+      angle: 0
