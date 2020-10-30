@@ -1,0 +1,428 @@
+Array::mult = (m) -> @map (v) -> v*m
+Array::add = (m) -> @map (v) -> v+m
+for key, value of []
+  delete Array::[key]
+  Object.defineProperty Array::, key,
+    value: value
+    configurable: true
+    enumerable: false
+addTurbolaser = (n, xpos, ypos, zpos, size, angle, dmg, rt, spd, nmbr) ->
+  model.bodies['turretBase'+n] =
+    section_segments: 21
+    offset:
+      x: xpos
+      y: zpos
+      z: -ypos
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-15,-15,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,17,14,0].mult(size)
+    height: [0,17,14,0].mult(size)
+    texture: [3,3,13]
+    vertical: true
+  model.bodies['turret'+n] =
+    section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-17,-15,-10,10,15,15].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,22,23,25,6,0].mult(size)
+    height: [0,5,7,7,5,0].mult(size)
+    texture: [3,3,16,16,17.1].add(-0.09)
+    angle: angle
+  model.bodies['gunRight'+n] =
+    section_segments: 12
+    offset:
+      x: xpos+(0*size)
+      y: ypos+(9*size)
+      z: zpos+(0*size)
+    position:
+      x: [0,0,0,0,0,0,0,0].add(10*size)
+      y: [-45,-47,-40,-40,-32,-32,-10,-2].mult(size)
+      z: [0,0,0,0,0,0,0,0]
+    width: [0,2,2,1,1,2,3,0].mult(size)
+    height: [0,2,2,1,1,2,3,0].mult(size)
+    texture: [12,4,4,13,3,18,3]
+    angle: angle
+    laser:
+      damage: dmg
+      rate: rt
+      speed: spd
+      number: nmbr
+  model.bodies['gunLeft'+n] =
+    section_segments: 12
+    offset:
+      x: xpos+(0*size)
+      y: ypos+(9*size)
+      z: zpos+(0*size)
+    position:
+      x: [0,0,0,0,0,0,0,0].add(-10*size)
+      y: [-44,-47,-40,-40,-32,-32,-10,-2].mult(size)
+      z: [0,0,0,0,0,0,0,0]
+    width: [0,2,2,1,1,2,3,0].mult(size)
+    height: [0,2,2,1,1,2,3,0].mult(size)
+    texture: [12,4,4,13,3,18,3]
+    angle: angle
+    laser:
+      damage: dmg
+      rate: rt
+      speed: spd
+      number: nmbr
+plate = (px,py,pz,l,w,ang,tex,h) ->
+  section_segments:[40,45,50,130,135,140,220,225,230,310,315,320]
+  offset:
+    x: px
+    y: py
+    z: pz
+  position:
+    x: [0,0,0,0]
+    y: [-l,-l,l,l]
+    z: [0,0,0,0]
+  width: [0,w,w,0]
+  height: [0,h,h,0]
+  texture: [tex]
+  angle:ang
+model =
+  name: 'Onager SD'
+  level: 5
+  model: 1
+  size: 1.9
+  zoom: 1.25
+  specs:
+    shield:
+      capacity: [1900,1900]
+      reload: [70,70]
+    generator:
+      capacity: [4000,4000]
+      reload: [400,400]
+    ship:
+      mass: 1500
+      speed: [90,90]
+      rotation: [10,10]
+      acceleration: [130,130]
+#Bump Details
+  bodies:
+    bump1: plate(37,-250,18,21,19,0,2,4)
+    bump2: plate(40,-230,1,21,17,0,2,4)
+    bump3: plate(27,-265,21,4,12,0,3,2)
+    bump4: plate(27,-235,21,4,12,0,3,2)
+    bump5: plate(27,-200,22,4,12,0,3,2)
+    bump6: plate(27,-170,23,4,12,0,3,2)
+    bump7: plate(27,-140,24,4,12,0,3,2)
+    bump8: plate(27,-110,25,4,12,0,3,2)
+    bump9: plate(27,-110,25,4,12,0,3,2)
+    bump10: plate(27,-80,26,4,12,0,3,2)
+    bump11: plate(27,-50,27,4,12,0,3,2)
+    bump12: plate(27,-20,28,4,12,0,3,2)
+    bump13: plate(27,10,29,4,12,0,3,2)
+    bump14: plate(27,40,31,4,12,0,3,2)
+    
+    bump15: plate(81,-260,20,10,10,0,2,2)
+    bump16: plate(177,-245,11,5,23,0,17,5)
+    bump17: plate(44,-200,21,14,12,0,2,2)
+    bump18: plate(43,-145,23,14,11,0,2,2)
+    bump19: plate(49,-220,20.5,14,12,0,8,2)
+    bump20: plate(49,-175,21,11,17,0,8,3)
+    bump21: plate(48,-110,25,14,16,0,2,2)
+    bump22: plate(43,-80,25,12,12,0,8,2)
+    bump23: plate(49,-50,27,14,17,0,2,2)
+    bump24: plate(42,-20,28,12,11,0,3,2)
+    bump25: plate(45,2,29,15,13,0,2,2)
+    bump26: plate(67,50,31,14,15,0,8,2)
+    bump27: plate(0,147,54,4,6,0,6,1)
+    bump28: plate(0,184,45,24,13,0,12,14)
+    bump29: plate(0,184,45,24,13,0,12,14)
+#Main Weapons 
+    CompositeTurbolaser1:
+      section_segments: 20
+      offset:
+        x: 18
+        y: 10
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-260,-267,-264,-261,-250,-230,-230]
+        z: [0,0,0,0,0,0,0]
+      width: [0,9,10,12,12,12,0]
+      height: [0,9,10,12,12,12,0]
+      laser:
+        damage: [20,20]
+        rate: 2
+        type: 1
+        speed: [150,150]
+        recoil: 5
+        number: 100
+        error: 0
+      texture: [12,63,15,13,8,1]
+      propeller: false
+#Cannon Detail
+    cannon2:
+      section_segments: 20
+      offset:
+        x: 18
+        y: 62
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-267,-267,-264,-261,-258,-254,-254]
+        z: [0,0,0,0,0,0,0]
+      width: [0,10,10,10,10,10,0]
+      height: [0,10,10,10,10,10,0]
+      texture: [16,17,15,17,8,16]
+      propeller: false
+    cannon5:
+      section_segments: 20
+      offset:
+        x: 18
+        y: 152
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-267,-267,-264,-261,-258,-254,-254]
+        z: [0,0,0,0,0,0,0]
+      width: [0,10,10,10,10,10,0]
+      height: [0,10,10,10,10,10,0]
+      texture: [16,17,15,17,8,16]
+      propeller: false
+    cannon10:
+      section_segments: 20
+      offset:
+        x: 18
+        y: 305
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-267,-267,-264,-261,-258,-254,-254]
+        z: [0,0,0,0,0,0,0]
+      width: [0,10,10,10,10,10,0]
+      height: [0,10,10,10,10,10,0]
+      texture: [16,17,15,17,8,16]
+      propeller: false
+    CannonSupports1:
+      section_segments: [35,45,55,125,135,145,215,225,235,305,315,325]
+      offset:
+        x: 19
+        y: 317
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-567,-567,-464,-361,-258,-254,-254]
+        z: [0,0,0,0,0,0,0]
+      width: [0,2,2,2,2,2,0]
+      height: [0,2,2,2,2,2,0]
+      texture: [1,1,1,1,1,1]
+      propeller: false
+    CannonSupports2:
+      section_segments: [35,45,55,125,135,145,215,225,235,305,315,325]
+      offset:
+        x: 12
+        y: 317
+        z: 17
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-567,-567,-464,-361,-258,-254,-254]
+        z: [0,0,0,0,0,0,0]
+      width: [0,2,2,2,2,2,0]
+      height: [0,2,2,2,2,2,0]
+      texture: [1,1,1,1,1,1]
+      propeller: false
+    CannonSupports3:
+      section_segments: [35,45,55,125,135,145,215,225,235,305,315,325]
+      offset:
+        x: 12
+        y: 317
+        z: 3
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-567,-567,-464,-361,-258,-254,-254]
+        z: [0,0,0,0,0,0,0]
+      width: [0,2,2,2,2,2,0]
+      height: [0,2,2,2,2,2,0]
+      texture: [1,1,1,1,1,1]
+      propeller: false
+    Detail1:
+      section_segments: [35,45,55,125,135,145,215,225,235,305,315,325]
+      offset:
+        x: 30
+        y: 317
+        z: 29.6
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-567,-567,-464,-361,-258,-254,-254]
+        z: [-11,-11,-7,-3,1,0,0]
+      width: [0,7,7,7,7,7,0]
+      height: [0,2,2,2,2,2,0]
+      texture: [3,12,12,12,12,3]
+      propeller: false
+    Detail2:
+      section_segments: [35,45,55,125,135,145,215,225,235,305,315,325]
+      offset:
+        x: 30
+        y: 317
+        z: -12
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-567,-567,-464,-361,-258,-254,-254]
+        z: [11,11,7,3,-1,0,0]
+      width: [0,7,7,7,7,7,0]
+      height: [0,2,2,2,2,2,0]
+      texture: [3,12,12,12,12,3]
+      propeller: false
+#Main Body
+    hull1:
+      section_segments: [45,135,225,315]
+      offset:
+        x: 0.01
+        y: 100
+        z: 9.8
+      position:
+        x: [120,122,124,54.7,45,56,3,-1,0,0]
+        y: [-360,-360,-345,-335,-335,-60,10,105,195]
+        z: [0,0,0,0,0,0,0,16,20]
+      width: [10,122,125,40,34,47,128,143,20]
+      height: [0,11,12,13,13,23,23,20,0]
+      propeller: false
+      texture: [2,1,2,2,1,1,1,1]
+#shield ballz
+    ShieldGenerator:
+      section_segments: 50
+      offset:
+        x: 23
+        y: 35
+        z: -54
+      position:
+        x:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:    [-17*0.25*2,-16.815*0.25*2,-16*0.25*2,-15.12*0.25*2,-13.24*0.25*2,-11.36*0.25*2,-9.48*0.25*2,-7.5*0.25*2,-5.46*0.25*2,-3.838*0.25*2,-1.878*0.25*2,0,1.878*0.25*2,3.828*0.25*2,5.46*0.25*2,7.6*0.25*2,9.48*0.25*2,11.36*0.25*2,13.24*0.25*2,15.118*0.25*2,16*0.25*2,16.815*0.25*2,17*0.25*2]
+        z:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:  [0,5*0.25,11.49*0.25,15.55*0.25,21.326*0.25,25.294*0.25,28.222*0.25,30.414*0.25,32.198*0.25,33.122*0.25,33.792*0.25,34*0.25,33.792*0.25,33.122*0.25,32.198*0.25,30.414*0.25,28.222*0.25,25.294*0.25,21.326*0.25,15.55*0.25,11.49*0.25,5*0.25,0]
+      height: [0,5*0.25,11.49*0.25,15.55*0.25,21.326*0.25,25.294*0.25,28.222*0.25,30.414*0.25,32.198*0.25,33.122*0.25,33.792*0.25,34*0.25,33.792*0.25,33.122*0.25,32.198*0.25,30.414*0.25,28.222*0.25,25.294*0.25,21.326*0.25,15.55*0.25,11.49*0.25,5*0.25,0]
+      texture: 11
+      propeller: false
+      vertical: true
+    ShieldGenerator1:
+      section_segments: 50
+      offset:
+        x: 0
+        y: 5
+        z: -90
+      position:
+        x:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:    [-17*1*2,-16.815*1*2,-16*1*2,-15.12*1*2,-13.24*1*2,-11.36*1*2,-9.48*1*2,-7.5*1*2,-5.46*1*2,-3.838*1*2,-1.878*1*2,0,1.878*1*2,3.828*1*2,5.46*1*2,7.6*1*2,9.48*1*2,11.36*1*2,13.24*1*2,15.118*1*2,16*1*2,16.815*1*2,17*1*2]
+        z:    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:  [0,5*1,11.49*1,15.55*1,21.326*1,25.294*1,28.222*1,30.414*1,32.198*1,33.122*1,33.792*1,34*1,33.792*1,33.122*1,32.198*1,30.414*1,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0]
+      height: [0,5*1,11.49*1,15.55*1,21.326*1,25.294*1,28.222*1,30.414*1,32.198*1,33.122*1,33.792*1,34*1,33.792*1,33.122*1,32.198*1,30.414*1,28.222*1,25.294*1,21.326*1,15.55*1,11.49*1,5*1,0]
+      texture: 11
+      propeller: false
+      vertical: true
+#Brige Superstructure
+    Bridge:
+      section_segments: [0,65,145,180,215,295]
+      offset:
+        x: 0
+        y: 180
+        z: 55
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-35,-30,0,5,10,10,10,10,10,10]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [7,25,25,25,0,0,0,0,0,0]
+      height: [0,9,9,9,9,9,5,2,0,0] 
+      texture: [0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8]
+      propeller: false
+    Bridge_Superstructure1:
+      section_segments: [40,130,180,230,320,360]
+      offset:
+        x: 0
+        y: 135
+        z: 26
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-70,-70,-70,85,85]
+        z: [-1,-2,-1,-1,3]
+      width: [0,65,65,65,0]
+      height: [0,15,15,15,0]
+      texture: [2,17,1]
+    Bridge_Superstructure2:
+      section_segments: [40,130,180,230,320,360]
+      offset:
+        x: 0
+        y: 125
+        z: 29
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-22,-22,-22,75,75]
+        z: [-1,-2,-1,-1,3]
+      width: [0,80,80,80,0]
+      height: [0,15,15,15,0]
+      texture: [3,17,2]
+     Bridge_Superstructure3:
+      section_segments: [40,135,180,225,320,360]
+      offset:
+        x: 30
+        y: 155
+        z: 21
+      position:
+        x: [0,0,0,0,0,0]
+        y: [0,0,0,55,55]
+        z: [-1,-2,-1,-1,3]
+      width: [0,50,50,50,0]
+      height: [0,15,15,15,0]
+      texture: [2,17,13]
+#engines
+    Engines:
+      section_segments: 12
+      offset:
+        x: 0
+        y: 170
+        z: 14
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,70,70,70,60]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,15,15,15,15,15,15,15,15,0]
+      height: [0,15,15,15,15,15,15,15,15,0]
+      texture: [4,4,10,3,4,3,17]
+      propeller: true
+    Engines1:
+      section_segments: 12
+      offset:
+        x: 80
+        y: 160
+        z: 12
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,70,70,70,60]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,15,15,15,15,15,15,15,15,0]
+      height: [0,15,15,15,15,15,15,15,15,0]
+      texture: [4,4,10,3,4,3,17]
+      propeller: true
+    Engines2:
+      section_segments: 12
+      offset:
+        x: 40
+        y: 165
+        z: 12
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,10,20,25,70,70,70,60]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,10,10,10,10,10,10,10,0]
+      height: [0,10,10,10,10,10,10,10,10,0]
+      texture: [4,4,10,3,4,3,17]
+      propeller: true
+addTurbolaser(1,75,-50,32,0.35,-30,[20,20],4,[160,160],1)
+addTurbolaser(2,38,180,45,0.32,-170,[20,20],4,[160,160],1)
+addTurbolaser(3,40,-110,30,0.35,0,[20,20],4,[160,160],1)
+addTurbolaser(4,75,10,33,0.35,-30,[20,20],4,[160,160],1)
+addTurbolaser(5,70,-240,25,0.35,-30,[20,20],4,[160,160],1)
+addTurbolaser(6,70,-180,26,0.35,-30,[20,20],4,[160,160],1)
+addTurbolaser(7,76,-120,29,0.35,-30,[20,20],4,[160,160],1)
+return model;
+
+
