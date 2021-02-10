@@ -1,0 +1,145 @@
+return model =
+  name: 'Fracture'
+  level: 5
+  model: 61
+  size: 1.5
+  specs:
+    shield:
+      capacity: [200,300]
+      reload: [5,7]
+    generator:
+      capacity: [100,200]
+      reload: [35,55]
+    ship:
+      mass: 250
+      speed: [85,95]
+      rotation: [45,65]
+      acceleration: [80,110]
+  bodies:
+    main:
+      section_segments: 10
+      offset:
+        x: 0
+        y: 20
+        z: 1
+      position:
+        x: [0,0,0,0,0,0,0,0]
+        y: [-73,-66,-70,-60,-50,20,45,41]
+        z: [0,0,0,0,0,0,0,0]
+      width: [0,3,6,13,17,20,15,0]
+      height: [0,2,4,12,16,22,15,0]
+      texture: [6,12,63,2,10,3,17]
+      propeller: true
+      laser:
+        damage: [3,5]
+        rate: 5
+        type: 1
+        speed: [150,190]
+        number: 1
+        angle: 0
+        error: 0
+    cockpit:
+      section_segments: 8
+      offset:
+        x: 0
+        y: 5
+        z: 11.6
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-40,-30,5,20,45]
+        z: [4,-6,-3,-2,6]
+      width: [0,8,10,10,0]
+      height: [0,15,15,15,0]
+      texture: [8.98,8.98,4,3]
+    propulsors:
+      section_segments: 12
+      offset:
+        x: 28
+        y: -40
+        z: -4
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0]
+        y: [-10,-15,-10,0,10,20,25,30,75,90,85]
+        z: [0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,10,12,12,12,12,12,10,10,0]
+      height: [0,10,10,12,12,12,12,12,10,10,0]
+      texture: [13,4,63,13,4,4,3,18,4,17]
+      propeller: true
+    side_segments:
+      angle: 270
+      section_segments: 4
+      offset:
+        x: -42
+        y: -10
+        z: -5
+      position:
+        x: [20,20,10,0,25,15,0,0,0,0]
+        y: [0,0,8,24,33,39]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,61,58,41,46,0]
+      height: [0,4,4,7,4,0]
+      texture: [4,63,4,63,3]
+    Guns:
+      section_segments: 12
+      offset:
+        x: 50
+        y: -33
+        z: -9
+      position:
+        x: [0,0,0,0,0,0]
+        y: [-60,-70,30,80,90,100]
+        z: [0,0,0,0,0,0]
+      width: [0,10,15,15,0]
+      height: [0,10,15,15,0]
+      laser:
+        damage: [40,55]
+        rate: 2
+        type: 2
+        speed: [190,240]
+        recoil: 200
+        number: 1
+        error: 0
+      texture: [12,2,3,4]
+  wings:
+    front:
+      doubleside: true
+      offset:
+        x: -44
+        y: -54
+        z: -7
+      length: [0,14,0]
+      width: [0,120,60,0]
+      angle: [0,0,0]
+      position: [0,20,40,50]
+      texture: [2,4,3]
+      bump:
+        position: 50
+        size: 10
+    bridge:
+      offset:
+        x: 0
+        y: 17
+        z: 7.9
+      length: [40,30]
+      width: [40,40,40]
+      angle: [0,-40]
+      position: [0,0,0,50]
+      texture: [8,3]
+      doubleside: true
+      bump:
+        position: -40
+        size: 4
+    main:
+      offset:
+        x: 0
+        y: 0
+        z: -20
+      length: [60]
+      width: [40,40]
+      angle: [13]
+      position: [0,10]
+      texture: [4]
+      doubleside: true
+      bump:
+        position: 10
+        size: 13
