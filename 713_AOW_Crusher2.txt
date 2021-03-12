@@ -1,0 +1,243 @@
+return model =
+  name: 'Crusher'
+  level: 7
+  model: 1
+  size: 2.3
+  specs:
+    shield:
+      capacity: [750,750]
+      reload: [11,11]
+    generator:
+      capacity: [310,310]
+      reload: [120,120]
+    ship:
+      mass: 650
+      speed: [70,70]
+      rotation: [30,30]
+      acceleration: [120,120]
+  bodies:
+    main1:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -20
+        z: 10
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0]
+        y: [-69,-65,-55,-40,0,30,60,80,105,100]
+        z: [0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,7,13,18,23,23,25,24,17,0]
+      height: [0,6,10,13,18,20,19,18,17,0]
+      texture: [6,4,63,10,11,4,13,63,17]
+      propeller: true
+      laser:
+        damage: [85,85]
+        rate: 1
+        type: 1
+        speed: [150,150]
+        recoil: 0
+        number: 1
+        error: 0
+    main2:
+      section_segments: 10
+      offset:
+        x: 46
+        y: -30
+        z: -23
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0]
+        y: [-40,-44,-41,-27,0,30,60,70,75,80]
+        z: [6,6,6,6,5,4,3,2,2,0,0]
+      width: [0,7,10,13,16,18,17,16,16,0]
+      height: [0,6,10,13,15,15,15,15,13,0]
+      texture: [12,4,63,2,8,4,13,63,4]
+      propeller: false
+      laser:
+        damage: [25,25]
+        rate: 1
+        type: 1
+        speed: [180,180]
+        recoil: 0
+        number: 1
+        error: 0
+    cockpit:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -75
+        z: 17
+      position:
+        x: [0,0,0,0,0,0]
+        y: [15,35,60,85,100]
+        z: [0,0,0,0,0]
+      width: [3,12,14,15,5]
+      height: [0,12,15,15,0]
+      texture: [4,9,9,4]
+    side1:
+      section_segments: 10
+      offset:
+        x:65
+        y: 0
+        z: -30
+      position:
+        x: [-6,-3,12,19,20,21,20,20,20,20]
+        y: [-100,-105,-45,0,30,40,70,80,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,10,14,14,17,17,17,17,15,0]
+      height: [0,12,14,14,16,16,16,16,16,0]
+      texture: [13,2,3,4,63,11,4,13,17]
+      laser:
+        damage: [25,25]
+        rate: 1
+        type: 1
+        speed: [210,210]
+        recoil: 0
+        number: 1
+        error: 0
+      propeller: true
+    side2:
+      section_segments: 10
+      offset:
+        x: 92
+        y: 26
+        z: -30
+      position:
+        x: [-6,-2,7,10,15,15,15,15,15,15]
+        y: [-90+13,-95+23,-45+20,0,30-20,40-20,70-20,80-20,100-30,90-20]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,9,12,12,15,15,15,15,10,0]
+      height: [0,9,12,12,15,15,15,15,10,0]
+      texture: [1,2,8,4,63,10,63,13,4]
+      laser:
+        damage: [5,5]
+        rate: 10
+        type: 1
+        speed: [200,200]
+        recoil: 0
+        number: 1
+        error: 0
+      propeller: false
+    intake:
+      section_segments: 12
+      offset:
+        x: 37
+        y: -15
+        z: 10
+      position:
+        x: [-18,-14,-6,0,0,0,0,0,0,0]
+        y: [-35,-30,-5,35,60,70,85,90,92]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,10,10,10,10,10,5,0]
+      height: [0,10,11,15,15,15,15,5,0]
+      texture: [3,63,4,15,63,4,4,3]
+    detail1:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -15
+        z: 24
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [25,27,25,35,60,70,72,80,82]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,10,10,10,10,10,5,0]
+      height: [0,6,11,11,11,11,11,5,0]
+      texture: [17,12,4,10,63,4,4,3]
+    detail2:
+      section_segments: 12
+      offset:
+        x: 25
+        y: -45
+        z: 11
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [25,27,25,35,60,70,72,80,82]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,5,10,10,10,10,10,5,0]
+      height: [0,6,11,11,11,11,11,5,0]
+      texture: [17,12,4,11,63,4,4,3]
+  wings:
+    main:
+      length: [20,0,0]
+      width: [55,55,50,20]
+      angle: [0,-20,0]
+      position: [0,0,0,0]
+      texture: [3,18,63]
+      doubleside: true
+      bump:
+        position: 30
+        size: 5
+      offset:
+        x: 40
+        y: 30
+        z: 10
+    spoiler:
+      length: [20,40,10,10]
+      width: [40,40,30,30,0]
+      angle: [-50,-10,-10,-10]
+      position: [60,60,70,80,115]
+      texture: [10,3,63]
+      doubleside: true
+      bump:
+        position: 30
+        size: 10
+      offset:
+        x: 20
+        y: -40
+        z: 0
+    font:
+      length: [40]
+      width: [40,15]
+      angle: [0]
+      position: [0,-15]
+      texture: [63]
+      doubleside: true
+      bump:
+        position: 30
+        size: 10
+      offset:
+        x: 45
+        y: -20
+        z: -24
+    main3:
+      doubleside: true
+      offset:
+        x: 18
+        y: -5
+        z: 10
+      length: [0,0,0,20]
+      width: [40,40,40,160,40]
+      angle: [-20,20,5,5]
+      position: [0,0,0,40,60]
+      texture: [0,8,13,63]
+      bump:
+        position: -5
+        size:7
+    main4:
+      doubleside: true
+      offset:
+        x: 60
+        y: 85
+        z: 10
+      length: [0,0,0,25]
+      width: [0,0,0,150,0]
+      angle: [-20,-20,-20,15]
+      position: [-40,-40,-40,-80,-40]
+      texture: [0,8,13,63]
+      bump:
+        position: 35
+        size: 10
+    main5:
+      doubleside: true
+      offset:
+        x: 69.99
+        y: 103
+        z: 12.7
+      length: [0,0,0,15.7]
+      width: [0,0,0,102,0]
+      angle: [-20,-20,-20,15]
+      position: [-40,-40,-40,-88,-59]
+      texture: [0,8,13,4]
+      bump:
+        position: 35
+        size: 10
