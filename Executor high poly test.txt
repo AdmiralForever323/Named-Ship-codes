@@ -1,0 +1,1312 @@
+#warning, this is a bit messy
+Array::mult = (m) -> @map (v) -> v*m
+Array::add = (m) -> @map (v) -> v+m
+#important stuff
+for key, value of []
+  delete Array::[key]
+  Object.defineProperty Array::, key,
+    value: value
+    configurable: true
+    enumerable: false
+Array::mult = (m) -> @map (v) -> v*m 
+Array::add = (m) -> @map (v) -> v+m
+for key, value of []
+  delete Array::[key]
+  Object.defineProperty Array::, key,
+    value: value
+    configurable: true
+    enumerable: false
+addTurret2 = (n, xpos, ypos, zpos, size, angle, damage, rate, speed, number) ->
+  model.bodies['TurretBase'+n] =
+    section_segments: 32
+    offset:
+      x: xpos
+      y: zpos
+      z: -ypos
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-20,-20,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,19,19,0].mult(size)
+    height: [0,19,19,0].mult(size)
+    texture: [3,2,11]
+    vertical: true
+  model.bodies['Turret'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [0,0,0,0,0]
+      y: [-20,-20,10,31.2,31.2].mult(size/1.1)
+      z: [0,0.1,1,0,0].mult(size/1.1)
+    width: [0,30,38,25,0].mult(size+0.01)
+    height: [0,10,13,15,0].mult(size)
+    texture: [2,1,1,1,1,1]
+    angle: angle
+  model.bodies['TurretBarrel'+n] =
+    section_segments: 22
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [18,18,18,18,18,18,18].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.40)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.40)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel1'+n] =
+    section_segments: 22
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-18,-18,-18,-18,-18,-18,-18].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.40)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel2'+n] =
+    section_segments: 22
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [12,12,12,12,12,12,12].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretBarrel3'+n] =
+    section_segments: 22
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-12,-12,-12,-12,-12,-12,-12].mult(size)
+      y: [-32,-34,-30,-13,8,10].mult(size*1.3)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    height: [0,2,4,3,2.5,2,0].mult(size*0.4)
+    texture: [17,2,12,2,3,3]
+    angle: angle
+    laser:
+      damage: damage
+      rate: rate
+      speed: speed
+      number: number
+  model.bodies['TurretThing1'+n] =
+    section_segments: 12
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [10,10,10,10,10,10,10].mult(size)
+      y: [-25.5,-25.5,-9,1,9,25.5,25.5].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1.5)
+    height: [0,5,5,5,5,5,0].mult(size*1.5)
+    texture: [7]
+    angle: angle+90
+  model.bodies['TurretGunMount1'+n] =
+    section_segments: 12
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [20,20,20,20,20,20,20].mult(size)
+      y: [-20,-20,-10,10,20,20].mult(size)
+      z: [0,0,0,0,0,0,0].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,12,4,12,1]
+    angle: angle+90
+  model.bodies['TurretThing3'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-20,-20,-20,-20,-20,-20,-20].mult(size)
+      y: [-20,-20,-9,1,9,20,20].mult(size)
+      z: [8,8,8,8,8,8,8].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [13]
+    angle: angle+90
+  model.bodies['TurretThing4'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [10,10,10,10,10,10,10].mult(size)
+      y: [-20,-20,0,5,10,14,14].mult(size)
+      z: [5,5,5,5,5,5,5].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*1)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [8]
+    angle: angle+90
+  model.bodies['Turretline'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [0,0,0,0,0,0,0].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['Turretline1'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-3,-3,-3,-3,-3,-3,-3].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['Turretline2'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-6,-6,-6,-6,-6,-6,-6].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['Turretline3'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [-9,-9,-9,-9,-9,-9,-9].mult(size)
+      y: [-30,-30,0,5,5,5,5].mult(size/1.3)
+      z: [7,7,7,7,7,7,7].mult(size)
+    width: [0,5,5,5,5,5,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [4]
+    angle: angle+90
+  model.bodies['TurretPlating'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [24,24,24,24,24,24,24].mult(size)
+      y: [-10,-10,-5,5,5,10,10].mult(size/0.96)
+      z: [7,7,7,7,7,7,7].mult(size+-1)
+    width: [0,25,25,25,25,25,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,1,3,1,1]
+    angle: angle+90
+  model.bodies['TurretPlating1'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [24,24,24,24,24,24,24].mult(size)
+      y: [20,20,20,20,20,22,22].mult(size)
+      z: [7,7,7,7,7,7,7].mult(size-0.9)
+    width: [0,25,25,25,25,25,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,1,3,1,1]
+    angle: angle+90
+  model.bodies['TurretPlating2'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [24,24,24,24,24,24,24].mult(size)
+      y: [-22,-22,-20,-20,-20,-20,-20].mult(size)
+      z: [7,7,7,7,7,7,7].mult(size-0.9)
+    width: [0,25,25,25,25,25,0].mult(size*0.2)
+    height: [0,5,5,5,5,5,0].mult(size*1)
+    texture: [1,1,3,1,1]
+    angle: angle+90
+  model.bodies['TurretPlating3'+n] =
+    section_segments: [45,90+45,180+45,270+45]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [24,24,24,24,24,24,24].mult(size*-0.4)
+      y: [10,10,20,20,20,22,22].mult(size*0.9)
+      z: [7,7,7,7,7,7,7].mult(size-0.1)
+    width: [0,25,25,25,25,25,0].mult(size*0.6)
+    height: [0,10,10,10,10,10,0].mult(size*1)
+    texture: [2,2,3,2,2]
+    angle: angle+90
+addDesperateMeasure = (n, xpos, ypos, zpos, size, angle) ->
+  model.bodies['detailBase'+n] =
+    section_segments: [45,135,225,315]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-55,-55,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,12,12,0].mult(size)
+    height: [0,4,4,0].mult(size)
+    texture: [16,1,3,17]
+    vertical: false
+    angle:angle
+  model.bodies['detailBase1'+n] =
+    section_segments: [45,135,225,315]
+    offset:
+      x: xpos
+      y: ypos
+      z: zpos+(11*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-55,-55,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,12,12,0].mult(size)
+    height: [0,4,4,0].mult(size)
+    texture: [16,1,3,17]
+    vertical: false
+    angle:angle
+  model.bodies['detailBase2'+n] =
+    section_segments: [45,135,225,315]
+    offset:
+      x: xpos
+      y: ypos+(60*size)
+      z: zpos+(4*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-55,-55,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,12,12,0].mult(size)
+    height: [0,4,4,0].mult(size)
+    texture: [16,1,3,17]
+    vertical: false
+    angle:angle
+  model.bodies['detailBase3'+n] =
+    section_segments: [45,135,225,315]
+    offset:
+      x: xpos
+      y: ypos+(60*size)
+      z: zpos+(14*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-55,-55,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,12,12,0].mult(size)
+    height: [0,4,4,0].mult(size)
+    texture: [16,1,3,17]
+    vertical: false
+    angle:angle
+  model.bodies['detailBase4'+n] =
+    section_segments: [45,135,225,315]
+    offset:
+      x: xpos
+      y: ypos+(30*size)
+      z: zpos+(24*size)
+    position:
+      x: [0,0,0,0,0,0]
+      y: [-55,-55,-4,-4].mult(size)
+      z: [0,0,0,0,0,0].mult(size)
+    width: [0,12,12,0].mult(size)
+    height: [0,4,4,0].mult(size)
+    texture: [16,1,3,17]
+    vertical: false
+    angle:angle
+SuperBlockFunction = (n, xpos, ypos, zpos, size, angle) ->
+  model.bodies['City1'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(0*size)
+        y: ypos+(0*size)
+        z: zpos+(0*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      height: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      texture: [4,7,4,16,4,4,3,15]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['City2'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(8*size)
+        y: ypos+(-1.2*size)
+        z: zpos+(-1.4*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      height: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      texture: [4,7,4,16,16,4,3,2,4]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['City3'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(5*size)
+        y: ypos+(-1.8*size)
+        z: zpos+(4*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      height: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      texture: [4,7,4,16,4,8,8,2,16]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['City4'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(1.8*size)
+        y: ypos+(0.9*size)
+        z: zpos+(6*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,4,4,4,4,4,4,3,3,0].mult(size)
+      height: [0,4,4,4,4,4,4,3,3,0].mult(size)
+      texture: [4,7,15.1,16,4,8,17,2,2]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['City5'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(1*size)
+        y: ypos+(-0.6*size)
+        z: zpos+(8*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      height: [0,3,3,5,5,5,5,5,5,0].mult(size)
+      texture: [4,7,4,16,4,8,8,2,4]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['City6'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(4*size)
+        y: ypos+(1.8*size)
+        z: zpos+(3*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,4,4,4,4,4,4,3,3,0].mult(size)
+      height: [0,4,4,4,4,4,4,3,3,0].mult(size)
+      texture: [4,7,4,16,4,16,4,2,3]
+      propeller: false
+      vertical:true
+      angle:angle
+  model.bodies['City7'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(4*size)
+        y: ypos+(2.8*size)
+        z: zpos+(8*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,14,15,15,15.5].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0].mult(size)
+      height: [0,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0].mult(size)
+      texture: [4,7,4,16,4,4,4,4,4]
+      propeller: false
+      vertical:true
+      angle:angle
+    laser:
+      damage:[50,50]
+      rate: [2.5]
+      speed: [250,250]
+      number: 2
+  model.bodies['City8'+n] =
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: xpos+(3*size)
+        y: ypos+(0*size)
+        z: zpos+(4*size)
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,14,15,15,15.5].mult(size)
+        z: [0,0,0,0,0,0,0,0,0,0].mult(size)
+      width: [0,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0].mult(size)
+      height: [0,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0].mult(size)
+      texture: [4,7,4,16,4,16,4,4,4]
+      propeller: false
+      vertical:true
+      angle:angle
+plate1 = (px,py,pz,l,w,ang,tex,h) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [5,5,10,10,15,15,20,20,24,24,28,28,33,33,35,35]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,6,6,4,4,6,6,3,3,6,6,3,3,6,6,0]
+      height: [0,6,6,4,4,6,6,3,3,6,6,3,3,6,6,0]
+      texture: [16,12,17,16,17,12,17,16,17,12,17,16,17,12,2]
+      vertical:false
+      propeller: false
+plate2 = (px,py,pz,l,w,ang,tex,h) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y: [6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13]
+        z: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width: [0,2,2,1,1,2,2,1,1,2,2,1,1,2,2,0]
+      height: [0,4,4,1,1,4,4,1,1,4,4,1,1,4,4,0]
+      texture: [1,1,16,2,16,1,16,2,16,1,16,2,16,1,2]
+      vertical:true
+      propeller: false
+plate3 = (px,py,pz,ang) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [0,0,0,2,10,12,13,14,14,14]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,3,3,5,5,5,5,5,5,0]
+      height: [0,3,3,5,5,5,5,5,5,0]
+      texture: [4,7,4,16,4,8,8,2,16]
+      propeller: false
+      vertical:true
+plate4 = (px,py,pz,l,w,ang,tex,h) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px-7
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0]
+        y: [-l,-l,l,l]
+        z: [0,0,0,0]
+      width: [0,w,w,0]
+      height: [0,h,h,0]
+      texture: [3]
+      vertical:false
+      propeller: false
+plate5 = (px,py,pz,l,w,ang,tex,h) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0]
+        y: [-l,-l,l,l]
+        z: [-5.5,-5.5,9,9]
+      width: [0,w,w,0]
+      height: [0,h,h,0]
+      texture: [3]
+      vertical:false
+      propeller: false
+      angle:ang
+plate6 = (px,py,pz,l,w,ang,tex,h) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0]
+        y: [-l,-l,l,l]
+        z: [5,5,0,0]
+      width: [0,w,w,0]
+      height: [0,h,h,0]
+      texture: [3]
+      vertical:false
+      propeller: false
+      angle:ang
+plate7 = (px,py,pz,l,w,ang,tex,h) ->
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: px
+        y: py
+        z: pz
+      position:
+        x: [0,0,0,0]
+        y: [-l,-l,l,l]
+        z: [15.5,15.5,8,8]
+      width: [0,w,w,0]
+      height: [0,h,h,0]
+      texture: [3]
+      vertical:false
+      propeller: false
+      angle:ang
+plate = (px,py,pz,l,w,ang,tex,h) ->
+  section_segments:[40,45,50,130,135,140,220,225,230,310,315,320]
+  offset:
+    x: px
+    y: py
+    z: pz
+  position:
+    x: [0,0,0,0]
+    y: [-l,-l,l,l]
+    z: [0,0,0,0]
+  width: [0,w,w,0]
+  height: [0,h,h,0]
+  texture: [tex]
+  angle:ang
+plate8 = (px,py,pz,l,w,ang,tex,h) ->
+  section_segments:[40,45,50,130,135,140,220,225,230,310,315,320]
+  offset:
+    x: px
+    y: py
+    z: pz
+  position:
+    x: [0,0,0,0]
+    y: [-l,-l,l,l]
+    z: [0,0,-3.5,-3]
+  width: [0,w,w,0]
+  height: [0,h,h,0]
+  texture: [tex]
+  angle:ang
+Finalizerblocc = (px,py,pz,w,h,s,z,z0,z1)->
+  vertical: true
+  angle: 180
+  section_segments: [45,135,225,315]
+  offset:
+    x: px
+    y: py
+    z: pz
+  position:
+    x: [0,0,0,0,0,0,0,0]
+    y: [-z-z1,-z-z1,-z-z0-z1,-z-z0-z1,-1,0,0,0]
+    z: [0,0,0,0,0,0,0]
+  width: [0,w,w,w-s,w-s,w,w,0]
+  height: [0,h,h,h-s,h-s,h,h,0]
+  texture: [4,4,17,16,4,18,4,7]
+model =
+  name: 'Executor Remastered'
+  level: 7
+  model: 1
+  size: 3
+  zoom: 1
+  specs:
+    shield:
+      capacity: [100000,100000]
+      reload: [5000,5000]
+    generator:
+      capacity: [50000,50000]
+      reload: [5000,5000]
+    ship:
+      mass: 50000
+      speed: [110,110]
+      rotation: [8,8]
+      acceleration: [30,30]
+  bodies:
+#This is where the fun begins
+    bump1: plate(0,-250,0,45,10,0,4,5)
+    bump2: plate(0,-250,1,43,12,0,17,5)
+    bump3: plate(0,-250,2,40,13,0,8.17,5)
+    bump4: plate(2,-250,1,37,15,0,7,6)
+    bump5: plate(20,-210,-1,25,10,0,4,4)
+    bump6: plate(20,-210,0,23,12,0,17,4)
+    bump7: plate(20,-210,0,20,13,0,18,5)
+    bump8: plate(20,-210,0,17,15,0,7,3)
+    bump9: plate(0,-140,7,55,10,0,4,8)
+    bump10: plate(0,-140,8,53,12,0,17,8)
+    bump11: plate(0,-140,9,50,17,0,8,8)
+    bump12: plate(7,-140,6,47,15,0,16,4)
+    bump13: plate(30,-130,0,55,5,0,4,8)
+    bump14: plate(30,-130,3,53,8,0,17,8)
+    bump15: plate(30,-130,5,50,10,0,18,8)
+    bump16: plate(33,-130,0,47,10,0,7,11)
+    bump17: plate(27,-130,0,47,8,0,7,4)
+    bump18: plate(0,-40,7,55,10,0,4,8)
+    bump19: plate(49,-34,0,26,12,0,13,9)
+    bump20: plate(0,-40,8,50,20,0,18,15)
+    bump21: plate(7,-40,6,47,15,0,16,14)
+    bump22: plate(0,50,12,35,20,0,4,8)
+    bump23: plate(0,50,13,33,22,0,17,9)
+    bump24: plate(0,50,12,31,20,0,8,15)
+    bump25: plate(14,34,1,52,5,90,12,14)
+    bump26: plate(14,57,1,52,5,90,12,14)
+    bump27: plate(14,77,1,52,5,90,12,14)
+    bump28: plate(38,40,5,55,10,0,4,8)
+    bump29: plate(38,40,6,53,12,0,17,9)
+    bump30: plate(38,40,6,50,20,0,18,15)
+    bump31: plate(45,40,4,47,15,0,7,14)
+    bump32: plate(35,-45,4,30,17,0,4,8)
+    bump33: plate(35,-45,5,28,19,0,16,8)
+    bump69: plate(35,-45,6,26,17,0,8.2,8)
+    bump70: plate(35,-45,6,17,15,0,17,4)
+    bump71: plate(38,150,5,55,10,0,4,8)
+    bump72: plate(38,150,6,53,12,0,17,9)
+    bump73: plate(38,150,6,50,20,0,8.2,15)
+    bump74: plate(55,150,0,47,15,0,12,14)
+    bump75: plate(20,315,12,105,10,0,4,8)
+    bump76: plate(20,315,12,103,12,0,17,9)
+    bump77: plate(20,315,12,100,20,0,3,18)
+    bump78: plate(28,315,10,97,15,0,17,16)
+    bump79: plate(65,310,6,95,16,0,4,12)
+    bump80: plate(65,310,6,93,18,0,17,14)
+    bump81: plate(65,310,6,90,24,0,3,18)
+    bump82: plate(75,310,0,87,19,0,16,16)
+    bump83: plate(83,500,10,85,17,0,4,12)
+    bump84: plate(83,500,10,83,16,0,17,14)
+    bump85: plate(83,500,10,80,27,0,8.2,18)
+    bump86: plate(89,500,5,77,19,0,17,16)
+    bump87: plate(30,530,10,125,17,0,4,24)
+    bump88: plate(30,530,10,123,16,0,17,25)
+    bump89: plate(30,530,11,120,33,0,16,26)
+    bump90: plate(38,530,5,117,19,0,16,20)
+    bump91: plate(0,150,12,55,20,0,4,8)
+    bump92: plate(0,150,13,53,22,0,17,9)
+    bump93: plate(0,150,14,51,30,0,8.2,15)
+    bump94: plate(0,580,23,125,35,0,3,22)
+    bump95: plate(0,600,23,123,36,0,17,25)
+    bump96: plate(0,600,24,120,43,0,13,26)
+    bump97: plate(25,600,22,117,29,0,16,20)
+    bump98: plate(0,580,38,40,35,0,3,22)
+    bump99: plate(0,598,38,40,36,0,17,25)
+    bump100: plate(0,600,38,40,43,0,13,26)
+    bump101: plate(22,600,37,37,29,0,18,20)
+    bump102: plate1(50,-50,5,25,10,0,4,8)
+    bump103: plate1(40,-140,2,25,10,0,4,8)
+    bump104: plate1(18,-180,10,25,10,0,4,8)
+    bump105: plate2(56,0,2,25,10,0,4,8)
+    bump106: plate2(56,0,-7,25,10,0,4,8)
+    bump107: plate2(56,0,-16,25,10,0,4,8)
+    bump108: plate2(56,0,-25,25,10,0,4,8)
+    bump109: plate2(56,0,-41,25,10,0,4,8)
+    bump110: plate2(56,0,-50,25,10,0,4,8)
+    bump111: plate2(56,0,-64,25,10,0,4,8)
+    bump112: plate2(56,0,-71,25,10,0,4,8)
+    bump113: plate2(40,-6,162,25,10,0,4,8)
+    bump114: plate2(56,0,-7,125,10,0,4,8)
+    bump115: plate2(40,-6,170,25,10,0,4,8)
+    bump116: plate3(40,-4,80,0)
+    bump117: plate3(44,-6,75,0)
+    bump118: plate3(34,2,84,0)
+    bump119: plate3(17,0,188,0)
+    bump120: plate3(22,-2,187,0)
+    bump121: plate3(42,-8,140,0)
+    bump122: plate3(20,2,107,0)
+    bump123: plate3(15,-8,235,0)
+    bump124: plate3(20,2,107,0)
+    bump125: plate(50,-90,0,13,7,0,13,8)
+    bump126: plate(58,-30,0,19,9,0,18,8)
+    bump127: plate(72,75,0,49,9,0,18,8)
+    bump128: plate(67,8,0,15,6,0,12,8)
+    bump129: plate(80,170,0,39,10,0,16,8)
+    bump130: plate(0,800,20,60,43,0,18,43)
+    bump131: plate1(37,-10,15,25,10,0,4,8)
+    bump132: plate1(0,-230,8,25,10,0,4,8)
+    bump133: plate1(80,50,0,25,10,0,4,8)
+    bump134: plate1(85,90,0,25,10,0,4,8)
+    bump135: plate1(90,190,0,25,10,0,4,8)
+    bump144: plate(0,170,13,40,40,0,16,20)
+    bump145: plate1(27,190,28,25,10,0,4,8)
+    bump146: plate(35,-45,8,16,7,0,11,8)
+    bump147: plate(0,15,30,16,12,0,15,5)
+    bump148: plate(23,100,28,20,12,0,12,5)
+    bump149: plate(42,190,25,28,12,0,8,5)
+    bump158: plate(23,100,28,20,12,0,12,5)
+    bump159: plate(23,100,28,20,12,0,12,5)
+    bump160: plate(0,10,35,35,24,0,8.17,5)
+    bump161: plate(0,195,35,35,24,0,16,5)
+    bump162: plate(0,335,35,35,24,0,16,5)
+    bump163: plate(60,280,22,35,24,0,16,5)
+    bump164: plate(40,395,35,35,24,0,16,5)
+    bump165: plate(110,395,5,50,24,0,13,5)
+    bump166: plate(85,235,1,50,24,0,13,5)
+    bump167: plate(103,315,1,45,20,0,16,5)
+    bump168: plate(103,315,1,45,20,0,16,5)
+    bump169: plate(130,500,1,45,25,0,16,9)
+    bump170: plate(133,620,1,65,30,0,12,12)
+    bump171: plate(133,620,1,50,20,0,16,16)
+    bump172: plate(170,770,1,65,30,0,18,14)
+    bump173: plate(170,770,1,50,20,0,16,18)
+    bump174: plate(165,650,1,40,20,0,15,13)
+    bump175: plate(60,700,1,40,20,0,8,55)
+    bump176: plate(70,900,1,80,40,0,12,55)
+    bump177: plate(30,950,1,100,20,0,13,80)
+    bump178: plate(25,1150,32,100,20,0,12,33)
+    bump179: plate(22,1150,30,60,40,0,16,20)
+    bump180: plate(0,1200,35,60,30,0,16,20)
+    bump181: plate(60,1050,25,70,20,0,18,25)
+    bump182: plate(110,1200,20,20,20,0,3,4)
+    bump183: plate(110,1050,20,20,20,0,3,5)
+    bump184: plate(240,800,-7,10,20,0,3,3)
+    bump185: plate(300,700,-16,10,20,0,3,3)
+    bump186: plate(40,1400,20,20,20,0,3,23)
+    bump187: plate(0,787,91,10,5,0,17,1)
+    bump188: plate(5,788,92,10,8,0,2,2)
+    bump189: plate(6,788,92,9,3,0,2,8)
+    bump190: plate(7,785,92,10,2,0,2,3)
+    bump191: plate(7,787,101,8,2,90,2,3.5)
+    bump192: plate(22,780,93,4,3,90,2,2)
+    bump193: plate(8,787,92,4,3,90,2,3)
+    bump194: plate2(24,20,0,25,10,0,4,8)
+    bump195: plate2(24,20,7,25,10,0,4,8)
+    bump196: plate2(24,20,14,25,10,0,4,8)
+    bump197: plate2(24,20,21,25,10,0,4,8)
+    bump236: plate5(21,-390,-10,271,2,0,2,2)
+    bump237: plate5(49,-200,-8,201,2,0,2,2)
+    bump238: plate5(99,100,-5,201,2,0,2,2)
+    bump239: plate5(250,600,-11,101,2,0,2,2)
+    bump240: plate5(185,600,-7.5,161,2,0,2,2)
+    bump241: plate5(250,690,-13.9,101,2,0,2,2)
+    bump242: plate6(71,-80,-8,29,2,90,2,2)
+    bump243: plate6(70,-190,-9.9,21,2,90,2,2)
+    bump244: plate6(71,-290,-12.6,21,2,90,2,2)
+    bump245: plate6(71,0,-7,29,2,90,2,2)
+    bump246: plate6(104,77,-7.5,29,2,90,2,2)
+    bump247: plate6(28,-450,-14.5,15,2,90,2,2)
+    bump248: plate6(40,-590,-18.5,20,2,90,2,2)
+    bump249: plate6(230,700,-11.5,70,2,90,2,2)
+    bump250: plate6(220,800,-10.5,30,2,90,2,2)
+    bump251: plate6(220,800,-10.5,30,2,90,2,2)
+    bump252: plate7(120,200,-62.5,100,3,0,2,2)
+    bump253: plate8(79,-40,-3,13,40,90,3,2)
+    bump254: plate8(79,40,-1.5,18,49,90,8,2)
+    bump255: plate8(67,-160,-5,10,29,90,3,2)
+    bump256: plate8(35,-240,-4,10,30,90,8,2)
+    bump257: plate8(145,140,-3,10,30,90,3,2)
+    bump258: plate8(35,-360,-5,10,30,90,3,2)
+    bump259: plate8(30,-480,-10,10,20,90,3,2)
+    bump260: plate8(160,280,-10,9,20,90,3,2)
+    bump261: plate8(24,-680,-13,9,20,90,3,2)
+    bump262: plate8(244,580,-1,9,20,90,3,2)
+    bump263: plate7(120,315,-67.5,30,20,270,2,2)
+    bump264: plate5(152,170,-9.5,201,2,0,2,2)
+    bump265: plate5(152,870,-7.5,101,2,0,2,2)
+    bump266: plate8(195,440,-1,11,30,90,3,2)
+    bump267: plate8(125,940,18,3,170,90,3,2)
+    bump268: plate8(100,1100,19,4,170,90,3,2)
+    bump269: plate(140,850,15,40,10,0,8,15)
+    bump270: plate(120,650,15,40,10,0,8,15)
+    bump271: plate(120,450,12,40,10,0,8,15)
+    bump272: plate(50,800,50,40,10,0,8,15)
+    bump273: plate(40,530,42,40,10,0,8,15)
+    bump274: plate8(50,1200,34,4,170,90,3,2)
+    bump275: plate7(120,515,-73.5,20,20,270,2,2)
+    bump276: plate7(260,675,-52.5,20,20,270,2,2)
+    bump277: plate7(240,600,-51.5,125,5,0,2,2)
+    bump278: plate7(110,610,-72.5,105,4,0,2,2)
+#Thanks Finalizer for the extra function
+    bump198: Finalizerblocc(44,3,47,10,10,-4,13,-3,3)
+    bump199: Finalizerblocc(0,10,-10,35,60,2,14,-5,12)
+    bump200: Finalizerblocc(0,6,-330,40,70,2,17,-3,12)
+    bump201: Finalizerblocc(40,-3,-200,30,80,2,20,-4,9)
+    bump202: Finalizerblocc(22,1,-103,25,45,-3,16,-3,10)
+    bump203: Finalizerblocc(0,3,60,23,40,2,16,-3.3,6)
+    bump204: Finalizerblocc(85,-16,-330,30,80,2,20,-2,9)
+    bump205: Finalizerblocc(0,10,-780,35,80,2,20,-2,35)
+    bump206: Finalizerblocc(60,4,-660,40,90,2,20,-2,9)
+    bump207: Finalizerblocc(0,18,-810,14,20,-5,20,-25,49)
+    bump208: Finalizerblocc(0,10,-193,35,65,-7,20,-4,4)
+    bump209: Finalizerblocc(0,10,-693,35,25,-7,20,-4,13)
+    bump210: Finalizerblocc(110,-8,-693,25,85,-7,20,-4,13)
+    bump211: Finalizerblocc(50,-12,-813,25,120,-7,20,-4,46)
+    bump212: Finalizerblocc(34,10,-37,14,16,-4,13,-3,2)
+    bump213: Finalizerblocc(23,8,137,8,8,-4,13,-3,1)
+    bump214: Finalizerblocc(95,-16,-560,25,40,2,29,-2,19)
+    bump215: Finalizerblocc(85,-16,-490,25,35,2,29,-2,22)
+    bump216: Finalizerblocc(40,-16,-330,30,115,2,29,-4,27)
+    bump217: Finalizerblocc(0,-5,-953,35,120,-7,20,-4,46)
+    bump218: Finalizerblocc(0,-5,-1103,30,90,-7,20,-4,41)
+    bump219: Finalizerblocc(50,-5,-1003,20,60,-7,20,-4,41)
+    bump220: Finalizerblocc(90,-5,-823,20,60,-7,20,-4,26)
+    bump221: Finalizerblocc(130,-12,-823,40,90,-7,20,-4,16)
+    bump233: Finalizerblocc(120,-22,-523,25,190,-7,20,-4,16)
+    bump234: Finalizerblocc(180,-25,-793,25,100,-7,20,-4,16)
+    bump235: Finalizerblocc(40,5,-533,25,100,-7,20,-4,23)
+#regular detailing
+    bump222: plate2(24,20,-7,25,10,0,4,8)
+    bump223: plate2(24,20,-14,25,10,0,4,8)
+    bump224: plate2(26,12,-7,25,10,0,4,8)
+    bump225: plate2(26,12,-14,25,10,0,4,8)
+    bump226: plate2(26,12,0,25,10,0,4,8)
+    bump227: plate2(26,12,7,25,10,0,4,8)
+    bump228: plate3(4,29,4,0)
+    bump229: plate3(4,29,-5,0)
+    bump230: plate3(9,28,0,0)
+    bump231: plate3(9,28,-8,0)
+    bump232: plate1(12,6,37,5,10,0,4,8)
+#bunch of othernon-function stuff
+    ShieldGenerator1:
+      section_segments: 30
+      offset:
+        x: 19
+        y: 97
+        z: -794
+      position:
+        x:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:[-17*0.12*2,-16.815*0.12*2,-16*0.21*2,-42*0.12*2,-13.24*0.12*2,-11.36*0.12*2,-9.48*0.12*2,-7.5*0.12*2,-5.46*0.12*2,-3.838*0.12*2,-1.878*0.12*2,0,1.878*0.12*2,3.828*0.1*2,5.46*0.1*2,7.6*0.1*2,9.48*0.1*2,11.36*0.1*2,13.24*0.1*2,15.118*0.1*2,16*0.1*2,16.815*0.1*2,17*0.1*2]
+        z:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:[0,1*0.12,11.49*0.12,15.55*0.1,12.326*0.1,25.294*0.1,28.222*0.1,30.414*0.1,32.198*0.1,33.122*0.1,33.792*0.1,34*0.1,33.792*0.1,33.122*0.1,32.198*0.1,30.414*0.1,28.222*0.1,25.294*0.1,21.326*0.1,15.55*0.1,11.49*0.1,5*0.1,0]
+      height:[0,1*0.1,11.49*0.1,15.55*0.1,21.326*0.1,25.294*0.1,28.222*0.1,30.414*0.1,32.198*0.1,33.122*0.1,33.792*0.1,34*0.1,33.792*0.1,33.122*0.1,32.198*0.1,30.414*0.1,28.222*0.1,25.294*0.1,21.326*0.1,15.55*0.1,11.49*0.1,5*0.1,0]
+      texture: [1,1,1,1,1,1,1,3,3,3,3,4,17,3,4,17,8,17,4,17,4,3,3]
+      propeller: false
+      vertical: true
+    ShieldGenerator2:
+      section_segments: 30
+      offset:
+        x: 124
+        y: 28
+        z: -694
+      position:
+        x:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:[-17*0.1*2,-16.815*0.1*2,-16*0.1*2,-15.12*0.1*2,-13.24*0.1*2,-11.36*0.1*2,-9.48*0.1*2,-7.5*0.1*2,-5.46*0.1*2,-3.838*0.1*2,-1.878*0.1*2,0,1.878*0.1*2,3.828*0.1*2,5.46*0.1*2,7.6*0.1*2,9.48*0.1*2,11.36*0.1*2,13.24*0.1*2,15.118*0.1*2,16*0.1*2,16.815*0.1*2,17*0.1*2]
+        z:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:[0,1*0.1,11.49*0.1,15.55*0.1,21.326*0.1,25.294*0.1,28.222*0.1,30.414*0.1,32.198*0.1,33.122*0.1,33.792*0.1,34*0.1,33.792*0.1,33.122*0.1,32.198*0.1,30.414*0.1,28.222*0.1,25.294*0.1,21.326*0.1,15.55*0.1,11.49*0.1,5*0.1,0]
+      height:[0,1*0.1,11.49*0.1,15.55*0.1,21.326*0.1,25.294*0.1,28.222*0.1,30.414*0.1,32.198*0.1,33.122*0.1,33.792*0.1,34*0.1,33.792*0.1,33.122*0.1,32.198*0.1,30.414*0.1,28.222*0.1,25.294*0.1,21.326*0.1,15.55*0.1,11.49*0.1,5*0.1,0]
+      texture: [1,1,1,1,1,1,1,3,3,3,3,4,17,3,4,17,8,17,4,17,4,3,3]
+      propeller: false
+      vertical: true
+    ShieldGenerator3:
+      section_segments: 30
+      offset:
+        x: 104
+        y: 15
+        z: -304
+      position:
+        x:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        y:[-17*0.1*2,-16.815*0.1*2,-16*0.1*2,-15.12*0.1*2,-13.24*0.1*2,-11.36*0.1*2,-9.48*0.1*2,-7.5*0.1*2,-5.46*0.1*2,-3.838*0.1*2,-1.878*0.1*2,0,1.878*0.1*2,3.828*0.1*2,5.46*0.1*2,7.6*0.1*2,9.48*0.1*2,11.36*0.1*2,13.24*0.1*2,15.118*0.1*2,16*0.1*2,16.815*0.1*2,17*0.1*2]
+        z:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      width:[0,1*0.1,11.49*0.1,15.55*0.1,21.326*0.1,25.294*0.1,28.222*0.1,30.414*0.1,32.198*0.1,33.122*0.1,33.792*0.1,34*0.1,33.792*0.1,33.122*0.1,32.198*0.1,30.414*0.1,28.222*0.1,25.294*0.1,21.326*0.1,15.55*0.1,11.49*0.1,5*0.1,0]
+      height:[0,1*0.1,11.49*0.1,15.55*0.1,21.326*0.1,25.294*0.1,28.222*0.1,30.414*0.1,32.198*0.1,33.122*0.1,33.792*0.1,34*0.1,33.792*0.1,33.122*0.1,32.198*0.1,30.414*0.1,28.222*0.1,25.294*0.1,21.326*0.1,15.55*0.1,11.49*0.1,5*0.1,0]
+      texture: [1,1,1,1,1,1,1,3,3,3,3,4,17,3,4,17,8,17,4,17,4,3,3]
+      propeller: false
+      vertical: true
+    Bridge1:
+      section_segments: 6
+      offset:
+        x: 0
+        y: 795
+        z: 91
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-15,-15,0,5,10,20,20,20,20,20]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,30,30,30,30,30,30,30,30,0]
+      height: [0,9,9,9,9,9,9,9,6,0] 
+      texture: [0.8]
+      propeller: false
+    Engines1:
+      section_segments: 12
+      offset:
+        x: 0
+        y: 1110
+        z: -35
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-350,-350,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,20,20,20,20,20,20,20,20,0]
+      height: [0,20,20,20,20,20,20,20,20,0]
+      texture: [18,13,17,8,12,17,13,13,17]
+      propeller: true
+    Engines2:
+      section_segments: 12
+      offset:
+        x: 50
+        y: 1080
+        z: -34
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-350,-350,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,20,20,20,20,20,20,20,20,0]
+      height: [0,20,20,20,20,20,20,20,20,0]
+      texture: [12,12,8,8,12,17,13,13,17]
+      propeller: true
+    Engines3:
+      section_segments: 12
+      offset:
+        x:135
+        y: 900
+        z: -32
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-200,-215,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,17,17,17,17,17,17,17,17,0]
+      height: [0,17,17,17,17,17,17,17,17,0]
+      texture: [12,12,8,8,12,17,13,13,17]
+      propeller: true
+    Engines4:
+      section_segments: 12
+      offset:
+        x: 100
+        y: 930
+        z: -36
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-210,-215,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,17,17,17,17,17,17,17,17,0]
+      height: [0,17,17,17,17,17,17,17,17,0]
+      texture: [12,12,8,8,12,17,13,13,17]
+      propeller: true
+    Engines5:
+      section_segments: 12
+      offset:
+        x: 195
+        y: 785
+        z: -55
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-80,-75,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,17,17,17,17,17,17,17,17,0]
+      height: [0,17,17,17,17,17,17,17,17,0]
+      texture: [12,12,8,8,12,17,13,13,17]
+      propeller: true
+    Engines6:
+      section_segments: 12
+      offset:
+        x: 225
+        y: 780
+        z: -53
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-80,-75,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,17,17,17,17,17,17,17,17,0]
+      height: [0,17,17,17,17,17,17,17,17,0]
+      texture: [12,12,8,8,12,17,13,13,17]
+      propeller: true
+    Engines7:
+      section_segments: 12
+      offset:
+        x: 165
+        y: 790
+        z: -58
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-80,-75,0,10,20,25,30,40,100,90]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,17,17,17,17,17,17,17,17,0]
+      height: [0,17,17,17,17,17,17,17,17,0] 
+      texture: [12,12,8,8,12,17,13,13,17]
+      propeller: true
+    hull1:
+      section_segments: 4
+      offset:
+        x: 0
+        y: 40
+        z: -19.2
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-935,-935,-335,0,50,805,935,1500,1520]
+        z: [0,0,0,0,0,0,22,50,50]
+      width: [0,4,127,196,206,362,180,70,0]
+      height: [0,1,16,28,29,32,33,11,0]
+      propeller: false
+      texture: [2]
+    hull2:
+      section_segments: 4
+      offset:
+        x: 0.1
+        y: 40
+        z: -31
+      position:
+        x: [0,0,104,136,0,0,0,0,0,0]
+        y: [-935,-935,-235,40,50,805,805,805,805]
+        z: [0,0,0,0,0,0,0,29]
+      width: [0,5,44,68,207,359,200,90,0]
+      height: [0,1,9,9,30,48,20,20,0]
+      propeller: false
+      texture: [2]
+    hull3:
+      section_segments: 4
+      offset:
+        x: 0
+        y: 0
+        z: -1
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-255,-235,-135,0,50,855,950,1280,1280]
+        z: [-2,-2,-2,-1,-0.6,-6,21.7,38]
+      width: [0,30,50,75,85,205,90,20,0]
+      height: [0,1,8,18,19,20,20,10,0]
+      propeller: false
+      texture: [4]
+    hull5:
+      section_segments: 4
+      offset:
+        x: 0
+        y: 840
+        z: -26
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-635,-635,-235,0,0,0,0,0,0]
+        z: [39,39,23,7,0,0,0,10]
+      width: [0,40,112,325,325,315,325,325,0]
+      height: [0,0,25,30,25,15,10,10,0]
+      propeller: false
+      texture: [18]
+      angle:180
+    Trenches1:
+      section_segments: [40,45,50,130,135,140,220,225,230,310,315,320]
+      offset:
+        x: 125
+        y: -260
+        z: -26
+      position:
+        x: [2,0,0,0,0,0,0,0,0,-90]
+        y: [-610,-610,-120,150,201,255,330,440,1100,1100]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,3,5,5,5,5,5,5,5,0]
+      height: [0,8,8,8,8,8,8,8,8,0]
+      texture: [3]
+      propeller: false
+      angle:11.7
+    HangarThingies1:
+      section_segments:[45,135,225,315]
+      offset:
+        x: 0
+        y: -165
+        z: -26
+      position:
+        x: [3,0,0,0,0,0,0,0,0,0]
+        y: [0,60,100,130,255,255,255,255,255,255]
+        z: [0,0,0,-15,-21,-10,-10,-10,-10,-10]
+      width: [5,9,29,28,29,9,9,9,9,0]
+      height: [0,10,13,15,20,10,10,10,10,0]
+      texture: [3]
+      propeller: false
+      angle:0
+    HangarThingies2:
+      section_segments:[45,135,225,315]
+      offset:
+        x: 65
+        y: -170
+        z: -25
+      position:
+        x: [-50,-50,-30,-10,0,0,0,0,0,0]
+        y: [-155,-150,-130,-100,255,255,255,255,255,255]
+        z: [-4,-4,-2,0,0,0,0,0,0,0]
+      width: [0,29,29,29,29,9,9,9,9,0]
+      height: [0,10,13,15,20,10,10,10,10,0]
+      texture: [3]
+      propeller: false
+      angle:6
+    HangarThingies3:
+      section_segments:4
+      offset:
+        x: 0
+        y: -565
+        z: -38
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-255,-210,-170,-100,255,255,255,255,255,255]
+        z: [5.5,9.8,11,9.5,1,1,1,1,0,0]
+      width: [0,12,20,36,87,87,87,87,87,0]
+      height: [0,10,13,15,15,10,10,10,10,0]
+      texture: [2,2,2,2,2]
+      propeller: false
+      angle:0
+#Turbolasers
+addTurret2(0,175,0,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(1,185,50,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(2,195,100,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(3,205,150,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(4,240,300,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(5,250,350,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(6,260,400,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(7,270,450,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(8,300,600,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(9,310,650,-12.8,0.3,-50,[20,20],2,[200,200],3)
+addTurret2(10,320,700,-12.8,0.3,-45,[20,20],2,[200,200],3)
+addTurret2(11,330,750,-12.8,0.3,-40,[20,20],2,[200,200],3)
+addTurret2(12,145,-150,-12.8,0.3,-35,[20,20],2,[200,200],3)
+addTurret2(13,135,-200,-12.8,0.3,-30,[20,20],2,[200,200],3)
+addTurret2(14,125,-250,-12.8,0.3,-25,[20,20],2,[200,200],3)
+addTurret2(15,115,-300,-12.8,0.3,-20,[20,20],2,[200,200],3)
+addTurret2(16,70,-500,-12.8,0.3,-15,[20,20],2,[200,200],3)
+addTurret2(17,60,-550,-12.8,0.3,-10,[20,20],2,[200,200],3)
+#Excessive Detailing
+addDesperateMeasure(28,62,160,18,0.2,0)
+addDesperateMeasure(29,62,180,15,0.2,0)
+addDesperateMeasure(30,62,160,13,0.16,0)
+addDesperateMeasure(31,62,205,15,0.25,0)
+addDesperateMeasure(32,10,805,65,0.25,0)
+addDesperateMeasure(33,10,805,73,0.28,0)
+addDesperateMeasure(34,4,805,70,0.25,0)
+addDesperateMeasure(35,3,805,78,0.28,0)
+addDesperateMeasure(36,24,805,55,0.28,0)
+addDesperateMeasure(37,24,770,55,0.28,0)
+addDesperateMeasure(38,21,720,55,0.28,90)
+addDesperateMeasure(39,72,770,40,0.28,0)
+addDesperateMeasure(40,72,800,40,0.28,0)
+addDesperateMeasure(41,72,830,45,0.20,0)
+addDesperateMeasure(42,61,290,25,0.36,0)
+addDesperateMeasure(43,61,330,23,0.36,0)
+addDesperateMeasure(44,61,380,24,0.4,0)
+addDesperateMeasure(45,89,630,23,0.35,0)
+SuperBlockFunction(56,6,16,36,1.1,0)
+SuperBlockFunction(57,4,17,46,0.90,0)
+SuperBlockFunction(58,4,15,60,0.93,0)
+SuperBlockFunction(59,2.8,24,15,1.3,0)
+SuperBlockFunction(60,8.8,26,-6,1.2,0)
+SuperBlockFunction(61,3.8,27,-20,1.1,0)
+SuperBlockFunction(62,3.8,27,-35,1,0)
+SuperBlockFunction(63,25,15,-39,1.3,0)
+SuperBlockFunction(64,12,19,-84,1,0)
+SuperBlockFunction(65,25,19,-100,1.2,0)
+SuperBlockFunction(66,28,19,-100,1,0)
+SuperBlockFunction(67,34,17,-160,1,0)
+SuperBlockFunction(68,34,20,-219,1.10,0)
+SuperBlockFunction(69,5,24,-219,1.30,0)
+SuperBlockFunction(70,5,24,-189,1.50,0)
+SuperBlockFunction(70,25,27,-269,1.50,0)
+SuperBlockFunction(71,16,25,-319,1.60,0)
+SuperBlockFunction(72,68,-5,-379,2.5,0)
+SuperBlockFunction(73,78,-9,-329,2.2,0)
+SuperBlockFunction(74,38,-4,-369,3.2,0)
+SuperBlockFunction(75,88,-19,-469,3.2,0)
+SuperBlockFunction(76,40,-9,-519,3.5,0)
+SuperBlockFunction(77,50,-13,-609,3.2,0)
+SuperBlockFunction(78,110,-28,-609,3.5,0)
+SuperBlockFunction(79,80,-4,-719,3.1,0)
+SuperBlockFunction(80,30,8,-519,3,0)
+SuperBlockFunction(81,0,-2,-449,3.5,0)
+SuperBlockFunction(82,26,-22,-76,2,180)
+SuperBlockFunction(83,25,-18,-46,2.3,180)
+SuperBlockFunction(84,26,-20,-9,2,180)
+SuperBlockFunction(89,-42,-20,-859,3.5,180)
+SuperBlockFunction(90,-92,-15,-859,3.5,180)
+SuperBlockFunction(91,-142,-15,-859,3,180)
+SuperBlockFunction(92,-50,-14,-919,3.8,180)
+SuperBlockFunction(93,-92,-12,-949,3.4,180)
+SuperBlockFunction(94,-142,-11,-929,3,180)
+SuperBlockFunction(95,-40,-11,-999,3.8,180)
+SuperBlockFunction(96,150,-7,-859,3,180)
+SuperBlockFunction(97,190,-2,-859,3,180)
+SuperBlockFunction(98,230,-16,-859,2.5,180)
+SuperBlockFunction(99,260,-16,-859,2,180)
+SuperBlockFunction(100,46,-10,-20,2.6,180)
+SuperBlockFunction(101,56,-9,-66,2.8,180)
+SuperBlockFunction(102,29,-7,26,2.7,180)
+SuperBlockFunction(103,9,-11,56,2.4,180)
+SuperBlockFunction(104,26,-11,66,2.2,180)
+SuperBlockFunction(105,8,-13,90,2.2,180)
+SuperBlockFunction(106,18,-13,110,2.3,180)
+SuperBlockFunction(107,13,-11,140,2.44,180)
+SuperBlockFunction(108,7,-10,170,2.4,180)
+SuperBlockFunction(109,5,-10,210,2.2,180)
+SuperBlockFunction(110,5,-8,240,2.2,180)
+SuperBlockFunction(111,5,-11,270,1.8,180)
+SuperBlockFunction(112,24,3,-309,3,0)
+SuperBlockFunction(113,100,-9,-539,3,0)
+SuperBlockFunction(114,120,-9,-809,3,0)
+SuperBlockFunction(115,60,11,-809,3,0)
+SuperBlockFunction(116,30,15,-909,3.7,0)
+SuperBlockFunction(117,10,15,-979,3.9,0)
+SuperBlockFunction(118,10,12,-1079,3.9,0)
+#Thanks to 45rfew (money) for the trench function
+textures = [17,16]    
+amount = 10
+for i in [0..12.5*amount] by 1
+  for j in [0...2] by 1
+    z = (Math.random()-.5)*1.5
+    y = (Math.random()-.6)*5
+    model.bodies["box"+i+j] =
+      section_segments: [45,135,225,315]
+      offset:
+        x: i*(27/amount)+2
+        y: i*((133+y)/amount)-890
+        z: z-j*5-23.3
+      position:
+        x: [0,0,0,0]
+        y: [0,0,15,15]
+        z: [0,0,0,0]
+      width: [0,3,3,0]
+      height: [0,1.5,1.5,0]
+      angle:12
+      texture: [textures[Math.floor(textures.length*Math.random())]]
+
+return model;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
