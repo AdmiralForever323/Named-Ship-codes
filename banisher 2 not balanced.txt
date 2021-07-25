@@ -1,0 +1,165 @@
+Y = 15
+return model =
+  name: 'Banisher'
+  level: 7
+  model: 1
+  size: 1.7
+  specs:
+    shield:
+      capacity: [300,300]
+      reload: [8,8]
+    generator:
+      capacity: [250,250]
+      reload: [70,70]
+    ship:
+      mass: 200
+      speed: [120,120]
+      rotation: [90,90]
+      acceleration: [80,80]
+  bodies:
+    main:
+      section_segments: 12
+      offset:
+        x: 0
+        y: 0-Y
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0]
+        y: [-87,-90,-80,-55,0,90,110,120,104]
+        z: [0,0,0,0,0,0,0,0,0]
+      width: [0,10,16,25,30,28,20,15,0]
+      height: [0,10,15,21,23,22,20,15,0]
+      propeller: true
+      texture: [13,63,2,10,11,63,13,17]
+      laser:
+        damage: [30,30]
+        rate: 2.25
+        type: 1
+        speed: [180,180]
+        number: 1
+        recoil: 0
+        error: 2
+    cockpit:
+      section_segments: 12
+      offset:
+        x: 0
+        y: -55-Y
+        z: 11
+      position:
+        x: [0,0,0,0,0,0,0]
+        y: [-10,0,27,50,70]
+        z: [8,1,1,3,9,0,0]
+      width: [0,10,12,12,0]
+      height: [0,12,15,12,0]
+      propeller: false
+      texture: [7,9,9,4]
+    thing1:
+      section_segments:10
+      offset:
+        x: 23
+        y: -33-Y
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-35,-25,0,10,20,25,40,45,50,60]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,12,12,12,12,12,12,12,12,0]
+      height: [0,12,12,12,12,12,12,12,12,0]
+      texture: [4,12,63,4,3,1,1]
+      propeller: false
+      angle:5
+    laser2:
+      section_segments: 10
+      offset:
+        x: 18.7
+        y: 22-Y
+        z: 8
+      position:
+        x: [-7,-3,-2,-1,-1,-1,-2,-4,0]
+        y: [-30,-25,0,13,25,35,40,65,75,0]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,11,12,12,12,12,12,11,0,0]
+      height: [0,11,12,12,12,12,12,11,0,0]
+      texture: [12,3,63,4,2,17,4,4]
+      propeller: false
+    laser12:
+      section_segments: 10
+      offset:
+        x: 26.6
+        y: 41-Y
+        z: 0
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-30,-25,0,13,25,35,50,65,60,0]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,13,13,13,13,13,13,10,0,0]
+      height: [0,12,13,13,13,13,13,10,0,0]
+      texture: [12,3,10,63,2,3,13,17]
+      propeller: true
+    laser3:
+      section_segments: 12
+      offset:
+        x: 0
+        y:42-Y
+        z: 11
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-20,-15,0,10,15,25,27,30,35,0]
+        z: [0,0,0,0,0,0,0,0,0,0]
+      width: [0,13,13,13,13,12,12,10,0,0]
+      height: [0,15,14,14,14,14,14,11,0,0]
+      texture: [12,3,10,63,63,5,13,4]
+      propeller: false
+    cannons:
+      section_segments: 10
+      offset:
+        x: 34
+        y:-10-Y
+        z:-2
+      position:
+        x: [0,0,0,0,0,0,0,0,0,0]
+        y: [-65,-70,-20,0,20,40,45]
+        z: [0,0,0,0,0,0,0]
+      width: [0,5,7,8,8,8,0,0]
+      height: [0,5,7,8,8,8,0,0]
+      angle: 3
+      propeller: false
+      texture: [12,4,63,11,8,4]
+      laser:
+        damage: [3,3]
+        rate: 3
+        type: 1
+        speed: [100,100]
+        number: 3
+        recoil: 0
+        error: 5
+        angle:15
+  wings:
+    main1:
+      length: [55,12]
+      width: [80,50,40]
+      angle: [-10,20]
+      position: [90,80,60]
+      doubleside: true
+      bump:
+        position: -30
+        size: 3
+      texture: [11,63]
+      offset:
+        x: 8
+        y: -25-Y
+        z: 1
+    main2:
+      length: [50,7]
+      width: [100,40,40]
+      angle: [-20,-10]
+      position: [60,60,66]
+      doubleside: true
+      bump:
+        position: -30
+        size: 3
+      texture: [8,63]
+      offset:
+        x: 8
+        y: -75-Y
+        z: 7
